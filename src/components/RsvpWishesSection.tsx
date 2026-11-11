@@ -25,10 +25,11 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
 
   // Load and subscribe from Supabase if configured
   useEffect(() => {
-    if (!isSupabaseConfigured || !supabase) return;
+    const client = supabase;
+    if (!isSupabaseConfigured || !client) return;
 
     const fetchWishes = async () => {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('wishes')
         .select('*')
         .order('created_at', { ascending: false })
@@ -41,7 +42,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
 
     fetchWishes();
 
-    const channel = supabase
+    const channel = client
       .channel('wishes-realtime')
       .on(
         'postgres_changes',
@@ -53,7 +54,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      client.removeChannel(channel);
     };
   }, []);
 
@@ -71,9 +72,10 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
       created_at: new Date().toISOString(),
     };
 
-    if (isSupabaseConfigured && supabase) {
+    const client = supabase;
+    if (isSupabaseConfigured && client) {
       try {
-        await supabase.from('wishes').insert([
+        await client.from('wishes').insert([
           {
             name: newWish.name,
             message: newWish.message,
@@ -81,7 +83,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
             pax: status === 'hadir' ? pax : 0,
           },
         ]);
-        await supabase.from('rsvps').insert([
+        await client.from('rsvps').insert([
           {
             name: newWish.name,
             status: newWish.status,
