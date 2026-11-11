@@ -67,4 +67,5 @@ export interface WeddingData {
   giftAddress: GiftAddress;
   audioSrc: string;
   liveStreamingUrl?: string;
+  hashtag?: string;
 }

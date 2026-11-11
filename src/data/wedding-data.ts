@@ -109,4 +109,5 @@ export const weddingData: WeddingData = {
   },
   audioSrc: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-113884.mp3',
   liveStreamingUrl: 'https://youtube.com',
+  hashtag: '#DedyTiaraForever',
 };

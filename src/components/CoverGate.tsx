@@ -3,7 +3,6 @@
 import React from 'react';
 import { Mail, Heart } from 'lucide-react';
 import { weddingData } from '@/data/wedding-data';
-
 interface CoverGateProps {
   guestName?: string;
   onOpen: () => void;
@@ -66,7 +65,7 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
 
       {/* Bottom Footer Quote */}
       <div className="relative pb-6 text-xs text-stone-400 tracking-wider">
-        <p>#DedyTiaraForever</p>
+        <p>{weddingData.hashtag ?? `#${weddingData.groom.nickName}${weddingData.bride.nickName}Forever`}</p>
       </div>
     </div>
   );
