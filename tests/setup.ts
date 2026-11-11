@@ -10,3 +10,9 @@ if (typeof document !== 'undefined') {
   document.execCommand = () => true;
 }
 
+if (typeof HTMLCanvasElement !== 'undefined') {
+  HTMLCanvasElement.prototype.getContext = () => new Proxy({}, {
+    get: () => () => {},
+  }) as any;
+}
+
