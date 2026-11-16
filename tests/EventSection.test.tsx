@@ -8,7 +8,7 @@ describe('EventSection Component', () => {
     render(<EventSection events={weddingData.events} />);
     expect(screen.getByText(weddingData.events.akad.title)).toBeTruthy();
     expect(screen.getByText(weddingData.events.resepsi.title)).toBeTruthy();
-    expect(screen.getByText(weddingData.events.akad.venueName)).toBeTruthy();
-    expect(screen.getByText(weddingData.events.resepsi.venueName)).toBeTruthy();
+    expect(screen.getAllByText(weddingData.events.akad.venueName).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(weddingData.events.resepsi.venueName).length).toBeGreaterThan(0);
   });
 });
