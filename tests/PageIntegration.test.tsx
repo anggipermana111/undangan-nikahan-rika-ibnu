@@ -12,6 +12,6 @@ describe('Wedding Invitation Full Page Integration', () => {
     render(<WeddingPage />);
     const openBtn = screen.getByRole('button', { name: /buka undangan/i });
     fireEvent.click(openBtn);
-    expect(screen.getByText(/Groom & Bride/i)).toBeTruthy();
+    expect(screen.getByText(/Calon Pengantin/i)).toBeTruthy();
   });
 });

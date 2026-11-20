@@ -1,59 +1,96 @@
+'use client';
+
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { StoryMilestone } from '@/types/wedding';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface LoveStorySectionProps {
   data: StoryMilestone[];
+}
+
+function FadeUpItem({ children, delay = '' }: { children: React.ReactNode; delay?: string }) {
+  const { ref, isVisible } = useScrollAnimation();
+  return (
+    <div ref={ref} className={`fade-up ${isVisible ? 'visible' : ''} ${delay}`}>
+      {children}
+    </div>
+  );
 }
 
 export default function LoveStorySection({ data }: LoveStorySectionProps) {
   if (!data || data.length === 0) return null;
 
   return (
-    <section id="story" className="relative py-24 px-4 bg-[#fbfdfc] text-center overflow-hidden">
-      {/* Decorative Tree Branch */}
-      <div 
-        className="absolute top-0 right-0 w-72 h-36 bg-contain bg-no-repeat pointer-events-none opacity-30"
-        style={{ backgroundImage: `url('/themes/dreamy/tree.webp')` }}
+    <section id="story" className="relative py-24 px-4 text-center overflow-hidden bg-[#f0f7f3]">
+      {/* Bg sky tint */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none"
+        style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
+      />
+
+      {/* Tree branch decorations */}
+      <div
+        className="absolute top-0 right-0 w-72 h-40 bg-contain bg-no-repeat pointer-events-none opacity-25"
+        style={{
+          backgroundImage: `url('/themes/dreamy/tree.webp')`,
+          transform: 'scaleX(-1)',
+        }}
+      />
+      <div
+        className="absolute bottom-10 left-0 w-56 h-32 bg-contain bg-no-repeat pointer-events-none opacity-20"
+        style={{ backgroundImage: `url('/themes/dreamy/big-tree.webp')` }}
       />
 
       <div className="relative max-w-2xl mx-auto z-10">
-        <p className="text-[11px] uppercase tracking-[0.35em] text-[#3f5d4a] font-medium font-sans mb-2">
-          Kisah Kami
-        </p>
-        <h2 className="font-serif text-3xl sm:text-5xl text-[#1e3325] mb-4">
-          A Little Story Called Us
-        </h2>
-        <p className="font-script text-2xl text-[#5b7a66] mb-16">
-          How our journey began...
-        </p>
-
-        {/* Timeline with Arch Card Style */}
-        <div className="relative border-l-2 border-[#b8d4c4] ml-4 sm:ml-28 space-y-12 text-left">
-          {data.map((item, index) => (
-            <div key={index} className="relative pl-8 sm:pl-10">
-              {/* Bullet Node */}
-              <div className="absolute -left-[17px] top-0 flex items-center justify-center w-8 h-8 rounded-full bg-[#edf4f0] border-2 border-[#3b5945] shadow-sm">
-                <Heart className="w-3.5 h-3.5 text-[#2d4234] fill-[#84a991]" />
-              </div>
-
-              {/* Card Container */}
-              <div className="bg-white/80 backdrop-blur-sm p-6 sm:p-7 rounded-3xl border border-[#d6e5dd] shadow-md shadow-[#1e3325]/5 hover:shadow-lg transition-all duration-300">
-                {/* Year Badge */}
-                <span className="inline-block px-3 py-1 bg-[#edf4f0] text-[#2d4234] font-sans font-semibold text-xs tracking-wider uppercase rounded-full mb-3">
-                  {item.year}
-                </span>
-
-                {/* Title & Story */}
-                <h3 className="font-serif text-2xl font-semibold text-[#1e3325] mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-stone-600 leading-relaxed font-sans">
-                  {item.story}
-                </p>
-              </div>
+        {/* Section Header */}
+        <FadeUpItem>
+          <div className="flex justify-center mb-5">
+            <div className="w-10 h-10 rounded-full bg-[#edf4f0] border-2 border-[#3b5945] flex items-center justify-center shadow-sm">
+              <Heart className="w-4 h-4 text-[#2d4234] fill-[#84a991]" />
             </div>
-          ))}
+          </div>
+          <p className="text-[11px] uppercase tracking-[0.4em] text-[#3f5d4a] font-semibold font-sans mb-2">
+            Kisah Cinta Kami
+          </p>
+          <h2 className="font-serif text-4xl sm:text-5xl text-[#1e3325] font-normal mb-3">
+            A Little Story
+          </h2>
+          <p className="font-script text-3xl sm:text-4xl text-[#3b5945] mb-14">
+            Called Us
+          </p>
+        </FadeUpItem>
+
+        {/* Timeline */}
+        <div className="relative text-left">
+          {/* Vertical line */}
+          <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#2d4234] via-[#b8d4c4] to-transparent z-0" />
+
+          <div className="space-y-10">
+            {data.map((item, index) => (
+              <FadeUpItem key={index} delay={`fade-up-delay-${index + 1}`}>
+                <div className="relative flex gap-6">
+                  {/* Timeline dot */}
+                  <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full bg-[#edf4f0] border-2 border-[#3b5945] flex items-center justify-center shadow-md">
+                    <Heart className="w-4 h-4 text-[#2d4234] fill-[#84a991]" />
+                  </div>
+
+                  {/* Card */}
+                  <div className="flex-1 bg-white/80 backdrop-blur-sm rounded-3xl px-6 py-5 border border-[#d0e8db] shadow-md shadow-[#1e3325]/5 hover:shadow-lg transition-shadow duration-300">
+                    <span className="inline-block px-3 py-1 bg-[#2d4234] text-white font-sans font-semibold text-[10px] tracking-widest uppercase rounded-full mb-3">
+                      {item.year}
+                    </span>
+                    <h3 className="font-serif text-2xl font-semibold text-[#1e3325] mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-stone-600 leading-relaxed font-sans">
+                      {item.story}
+                    </p>
+                  </div>
+                </div>
+              </FadeUpItem>
+            ))}
+          </div>
         </div>
       </div>
     </section>
