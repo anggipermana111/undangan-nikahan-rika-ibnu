@@ -134,7 +134,7 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
           }}
         >
           <img
-            src="/images/photo-1.jpg"
+            src="/images/photo-3.jpg"
             alt="Ibnu & Rika"
             className="w-full h-full object-cover object-top"
           />

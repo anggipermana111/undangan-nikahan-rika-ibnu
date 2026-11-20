@@ -76,42 +76,22 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
           </h2>
         </FadeUpDiv>
 
-        {/* Couple Cards */}
+        {/* Couple Names Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 items-start">
           {/* Groom Card */}
           <FadeUpDiv delay="fade-up-delay-3">
-            <div className="flex flex-col items-center">
-              {/* Arch photo */}
-              <div
-                className="relative mb-6 shadow-2xl border-4 border-white bg-stone-100"
-                style={{
-                  width: '200px',
-                  height: '268px',
-                  borderRadius: '9999px 9999px 1.5rem 1.5rem',
-                  overflow: 'hidden',
-                }}
-              >
-                <img
-                  src={groom.photo}
-                  alt={groom.fullName}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/30 via-transparent to-transparent" />
-                {/* The Groom badge */}
-                <div className="absolute bottom-3 inset-x-0 flex justify-center">
-                  <span className="px-4 py-1 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-md">
-                    The Groom
-                  </span>
-                </div>
-              </div>
+            <div className="flex flex-col items-center bg-white/60 backdrop-blur-md rounded-3xl p-8 border border-white/80 shadow-lg shadow-[#1e3325]/5">
+              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
+                The Groom
+              </span>
 
-              <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-[#1e3325] mb-1">
+              <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2">
                 {groom.fullName}
               </h3>
-              <p className="text-xs uppercase tracking-wider text-[#43624f] mb-1 font-medium font-sans">
+              <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
                 {groom.orderInFamily} 2 bersaudara
               </p>
-              <p className="text-sm text-stone-600 mb-5 font-sans">
+              <p className="text-sm text-stone-600 mb-6 font-sans">
                 {groom.parents}
               </p>
 
@@ -120,10 +100,10 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
                   href={`https://instagram.com/${groom.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white/80 hover:bg-white px-4 py-2 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
+                  className="inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white hover:bg-[#edf4f0] px-5 py-2.5 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
                 >
-                  <Instagram className="w-3.5 h-3.5 text-[#3b5945]" />
-                  <span>@{groom.instagram}</span>
+                  <Instagram className="w-4 h-4 text-[#3b5945]" />
+                  <span className="font-medium">@{groom.instagram}</span>
                 </a>
               )}
             </div>
@@ -131,38 +111,18 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
 
           {/* Bride Card */}
           <FadeUpDiv delay="fade-up-delay-4">
-            <div className="flex flex-col items-center">
-              {/* Arch photo */}
-              <div
-                className="relative mb-6 shadow-2xl border-4 border-white bg-stone-100"
-                style={{
-                  width: '200px',
-                  height: '268px',
-                  borderRadius: '9999px 9999px 1.5rem 1.5rem',
-                  overflow: 'hidden',
-                }}
-              >
-                <img
-                  src={bride.photo}
-                  alt={bride.fullName}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/30 via-transparent to-transparent" />
-                {/* The Bride badge */}
-                <div className="absolute bottom-3 inset-x-0 flex justify-center">
-                  <span className="px-4 py-1 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-md">
-                    The Bride
-                  </span>
-                </div>
-              </div>
+            <div className="flex flex-col items-center bg-white/60 backdrop-blur-md rounded-3xl p-8 border border-white/80 shadow-lg shadow-[#1e3325]/5">
+              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
+                The Bride
+              </span>
 
-              <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-[#1e3325] mb-1">
+              <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2">
                 {bride.fullName}
               </h3>
-              <p className="text-xs uppercase tracking-wider text-[#43624f] mb-1 font-medium font-sans">
+              <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
                 {bride.orderInFamily} 5 bersaudara
               </p>
-              <p className="text-sm text-stone-600 mb-5 font-sans">
+              <p className="text-sm text-stone-600 mb-6 font-sans">
                 {bride.parents}
               </p>
 
@@ -171,10 +131,10 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
                   href={`https://instagram.com/${bride.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white/80 hover:bg-white px-4 py-2 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
+                  className="inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white hover:bg-[#edf4f0] px-5 py-2.5 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
                 >
-                  <Instagram className="w-3.5 h-3.5 text-[#3b5945]" />
-                  <span>@{bride.instagram}</span>
+                  <Instagram className="w-4 h-4 text-[#3b5945]" />
+                  <span className="font-medium">@{bride.instagram}</span>
                 </a>
               )}
             </div>

@@ -23,6 +23,17 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
   }, [guestName]);
 
   useEffect(() => {
+    // Muat ucapan dari local storage jika ada
+    try {
+      const stored = localStorage.getItem('wedding_wishes_local');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setWishes(parsed);
+        }
+      }
+    } catch {}
+
     const client = supabase;
     if (!isSupabaseConfigured || !client) return;
 
@@ -94,7 +105,13 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
       }
     }
 
-    setWishes((prev) => [newWish, ...prev]);
+    setWishes((prev) => {
+      const updated = [newWish, ...prev];
+      try {
+        localStorage.setItem('wedding_wishes_local', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
     setMessage('');
     setSubmitting(false);
     setSubmitted(true);
@@ -253,42 +270,48 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
           </div>
 
           <div className="space-y-4 max-h-[480px] overflow-y-auto pr-2">
-            {wishes.map((item) => (
-              <div
-                key={item.id}
-                className="p-6 rounded-3xl bg-white/90 border border-[#d6e5dd] shadow-sm transition-all"
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#edf4f0] text-[#2d4234] font-serif font-bold text-sm flex items-center justify-center border border-[#cbdcd2]">
-                      {item.name.charAt(0).toUpperCase()}
+            {wishes.length === 0 ? (
+              <div className="py-8 px-6 text-center rounded-3xl bg-white/70 border border-[#d6e5dd] text-stone-500 font-sans text-sm">
+                Belum ada doa & ucapan. Jadilah yang pertama memberikan doa restu untuk kedua mempelai! ✨
+              </div>
+            ) : (
+              wishes.map((item) => (
+                <div
+                  key={item.id}
+                  className="p-6 rounded-3xl bg-white/90 border border-[#d6e5dd] shadow-sm transition-all"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-[#edf4f0] text-[#2d4234] font-serif font-bold text-sm flex items-center justify-center border border-[#cbdcd2]">
+                        {item.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <h4 className="font-serif font-semibold text-base text-[#1c2e22]">
+                          {item.name}
+                        </h4>
+                        <span className="text-[10px] text-stone-400 font-sans">
+                          {formatRelativeTime(item.created_at)}
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-serif font-semibold text-base text-[#1c2e22]">
-                        {item.name}
-                      </h4>
-                      <span className="text-[10px] text-stone-400 font-sans">
-                        {formatRelativeTime(item.created_at)}
-                      </span>
-                    </div>
+
+                    <span
+                      className={`text-[10px] uppercase font-sans tracking-wider px-3 py-1 rounded-full font-medium ${
+                        item.status === 'hadir'
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          : 'bg-stone-100 text-stone-600 border border-stone-200'
+                      }`}
+                    >
+                      {item.status === 'hadir' ? 'Hadir' : 'Berhalangan'}
+                    </span>
                   </div>
 
-                  <span
-                    className={`text-[10px] uppercase font-sans tracking-wider px-3 py-1 rounded-full font-medium ${
-                      item.status === 'hadir'
-                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                        : 'bg-stone-100 text-stone-600 border border-stone-200'
-                    }`}
-                  >
-                    {item.status === 'hadir' ? 'Hadir' : 'Berhalangan'}
-                  </span>
+                  <p className="text-stone-700 text-xs sm:text-sm leading-relaxed pl-12 font-sans">
+                    {item.message}
+                  </p>
                 </div>
-
-                <p className="text-stone-700 text-xs sm:text-sm leading-relaxed pl-12 font-sans">
-                  {item.message}
-                </p>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

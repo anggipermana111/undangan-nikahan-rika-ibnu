@@ -26,27 +26,5 @@ export interface WishRecord {
   created_at: string;
 }
 
-// Initial mock wishes
-export const defaultWishes: WishRecord[] = [
-  {
-    id: 'mock-1',
-    name: 'Budi Santoso & Keluarga',
-    message: 'Barakallahu lakuma wa baraka alaikuma wa jamaa bainakuma fii khoir. Selamat menempuh hidup baru Dedy & Tiara!',
-    status: 'hadir',
-    created_at: new Date(Date.now() - 3600000 * 4).toISOString(),
-  },
-  {
-    id: 'mock-2',
-    name: 'Alumni Teknik 2016',
-    message: 'Happy wedding bro Dedy dan Tiara! Semoga langgeng, sakinah mawaddah warahmah sampai kakek nenek.',
-    status: 'hadir',
-    created_at: new Date(Date.now() - 3600000 * 8).toISOString(),
-  },
-  {
-    id: 'mock-3',
-    name: 'Siti Rahmawati',
-    message: 'Selamat Tiara sayang! Terharu banget akhirnya berlabuh. Semoga bahagia selalu ya kalian berdua.',
-    status: 'tidak_hadir',
-    created_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-  },
-];
+// Initial mock wishes (kosongkan sesuai permintaan)
+export const defaultWishes: WishRecord[] = [];

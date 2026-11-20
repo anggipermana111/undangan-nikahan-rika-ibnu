@@ -100,12 +100,6 @@ export const weddingData: WeddingData = {
       alt: 'Momen Prewedding Ibnu & Rika 6',
       caption: 'Janji suci di setiap tatapan',
     },
-    {
-      id: '7',
-      src: '/images/photo-9.jpg',
-      alt: 'Momen Prewedding Ibnu & Rika 7',
-      caption: 'Melangkah berdua selamanya',
-    },
   ],
   bankAccounts: [
     {

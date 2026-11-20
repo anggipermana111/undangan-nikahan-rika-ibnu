@@ -78,25 +78,25 @@ export default function GallerySection({ images }: GallerySectionProps) {
           </p>
         </div>
 
-        {/* Masonry-style arch photo grid */}
-        <div className="columns-2 sm:columns-3 gap-4 space-y-4">
+        {/* Curated Grid Arch Photo Gallery */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {images.map((photo, index) => (
             <FadeUpPhoto
               key={photo.id}
-              delay={`fade-up-delay-${(index % 5) + 1}`}
+              delay={`fade-up-delay-${(index % 3) + 1}`}
             >
               <div
                 onClick={() => openLightbox(index)}
-                className={`group relative w-full cursor-pointer overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 bg-stone-100 border-2 border-white mb-4 break-inside-avoid ${heightClasses[index] || 'aspect-[2/3]'}`}
+                className="group relative w-full aspect-[3/4] cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1.5 bg-stone-100 border-[3px] border-white"
                 style={{ borderRadius: '9999px 9999px 1.5rem 1.5rem' }}
               >
                 <img
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-108"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                   {photo.caption && (
                     <p className="text-white text-xs text-left font-serif italic drop-shadow-md leading-snug">
                       {photo.caption}
