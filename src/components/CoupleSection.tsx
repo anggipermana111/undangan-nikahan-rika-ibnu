@@ -76,65 +76,69 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
           </h2>
         </FadeUpDiv>
 
-        {/* Couple Names Details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 items-start">
-          {/* Groom Card */}
-          <FadeUpDiv delay="fade-up-delay-3">
-            <div className="flex flex-col items-center bg-white/60 backdrop-blur-md rounded-3xl p-8 border border-white/80 shadow-lg shadow-[#1e3325]/5">
-              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
-                The Groom
-              </span>
-
-              <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2">
-                {groom.fullName}
-              </h3>
-              <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
-                {groom.orderInFamily} 2 bersaudara
-              </p>
-              <p className="text-sm text-stone-600 mb-6 font-sans">
-                {groom.parents}
-              </p>
-
-              {groom.instagram && (
-                <a
-                  href={`https://instagram.com/${groom.instagram}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white hover:bg-[#edf4f0] px-5 py-2.5 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
-                >
-                  <Instagram className="w-4 h-4 text-[#3b5945]" />
-                  <span className="font-medium">@{groom.instagram}</span>
-                </a>
-              )}
-            </div>
-          </FadeUpDiv>
-
-          {/* Bride Card */}
-          <FadeUpDiv delay="fade-up-delay-4">
-            <div className="flex flex-col items-center bg-white/60 backdrop-blur-md rounded-3xl p-8 border border-white/80 shadow-lg shadow-[#1e3325]/5">
+        {/* Couple Names Details (Bride first, then Groom) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 max-w-3xl mx-auto items-stretch">
+          {/* Bride Card (Wanita di awal) */}
+          <FadeUpDiv delay="fade-up-delay-3" className="h-full">
+            <div className="flex flex-col items-center justify-between h-full bg-white/70 backdrop-blur-md rounded-3xl p-7 sm:p-8 border border-white/90 shadow-lg shadow-[#1e3325]/5 hover:shadow-xl transition-all duration-300">
               <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
                 The Bride
               </span>
 
-              <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2">
-                {bride.fullName}
-              </h3>
-              <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
-                {bride.orderInFamily} 5 bersaudara
-              </p>
-              <p className="text-sm text-stone-600 mb-6 font-sans">
-                {bride.parents}
-              </p>
+              <div className="my-auto text-center">
+                <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2 leading-tight">
+                  {bride.fullName}
+                </h3>
+                <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
+                  {bride.orderInFamily} 5 bersaudara
+                </p>
+                <p className="text-sm text-stone-600 font-sans leading-relaxed">
+                  {bride.parents}
+                </p>
+              </div>
 
               {bride.instagram && (
                 <a
                   href={`https://instagram.com/${bride.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white hover:bg-[#edf4f0] px-5 py-2.5 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
+                  className="mt-6 inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white hover:bg-[#edf4f0] px-5 py-2.5 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
                 >
                   <Instagram className="w-4 h-4 text-[#3b5945]" />
                   <span className="font-medium">@{bride.instagram}</span>
+                </a>
+              )}
+            </div>
+          </FadeUpDiv>
+
+          {/* Groom Card (Pria) */}
+          <FadeUpDiv delay="fade-up-delay-4" className="h-full">
+            <div className="flex flex-col items-center justify-between h-full bg-white/70 backdrop-blur-md rounded-3xl p-7 sm:p-8 border border-white/90 shadow-lg shadow-[#1e3325]/5 hover:shadow-xl transition-all duration-300">
+              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
+                The Groom
+              </span>
+
+              <div className="my-auto text-center">
+                <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2 leading-tight">
+                  {groom.fullName}
+                </h3>
+                <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
+                  {groom.orderInFamily} 2 bersaudara
+                </p>
+                <p className="text-sm text-stone-600 font-sans leading-relaxed">
+                  {groom.parents}
+                </p>
+              </div>
+
+              {groom.instagram && (
+                <a
+                  href={`https://instagram.com/${groom.instagram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 text-xs text-[#2c4033] bg-white hover:bg-[#edf4f0] px-5 py-2.5 rounded-full border border-[#b8d4c4]/60 transition-all font-sans shadow-sm"
+                >
+                  <Instagram className="w-4 h-4 text-[#3b5945]" />
+                  <span className="font-medium">@{groom.instagram}</span>
                 </a>
               )}
             </div>

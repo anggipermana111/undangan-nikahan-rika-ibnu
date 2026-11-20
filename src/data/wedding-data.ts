@@ -72,27 +72,27 @@ export const weddingData: WeddingData = {
     },
     {
       id: '2',
-      src: '/images/photo-2.jpg',
-      alt: 'Momen Prewedding Ibnu & Rika 2',
-      caption: 'Langkah pertama menuju keabadian',
-    },
-    {
-      id: '3',
       src: '/images/photo-3.jpg',
-      alt: 'Momen Prewedding Ibnu & Rika 3',
+      alt: 'Momen Prewedding Ibnu & Rika 2',
       caption: 'Dalam pelukan cinta dan doa',
     },
     {
+      id: '3',
+      src: '/images/photo-4.jpg',
+      alt: 'Momen Prewedding Ibnu & Rika 3',
+      caption: 'Langkah pertama menuju keabadian',
+    },
+    {
       id: '4',
-      src: '/images/photo-6.jpg',
+      src: '/images/photo-5.jpg',
       alt: 'Momen Prewedding Ibnu & Rika 4',
-      caption: 'Satu rasa, satu tujuan',
+      caption: 'Kehangatan dalam kesederhanaan',
     },
     {
       id: '5',
-      src: '/images/photo-7.jpg',
+      src: '/images/photo-6.jpg',
       alt: 'Momen Prewedding Ibnu & Rika 5',
-      caption: 'Kehangatan dalam kesederhanaan',
+      caption: 'Satu rasa, satu tujuan',
     },
     {
       id: '6',

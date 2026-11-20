@@ -23,7 +23,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
   }, [guestName]);
 
   useEffect(() => {
-    // Muat ucapan dari local storage jika ada
+    // 1. Ambil dari local storage terlebih dahulu agar langsung muncul di browser
     try {
       const stored = localStorage.getItem('wedding_wishes_local');
       if (stored) {
@@ -34,6 +34,36 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
       }
     } catch {}
 
+    // 2. Fetch data dari API internal backend (hanya jika di browser)
+    const fetchApiWishes = async () => {
+      if (typeof window === 'undefined') return;
+      try {
+        const res = await fetch('/api/wishes');
+        if (res.ok) {
+          const json = await res.json();
+          if (json.wishes && Array.isArray(json.wishes) && json.wishes.length > 0) {
+            setWishes((prev) => {
+              // Gabungkan unik berdasarkan id
+              const map = new Map<string, WishRecord>();
+              json.wishes.forEach((w: WishRecord) => map.set(w.id, w));
+              prev.forEach((w) => map.set(w.id, w));
+              const merged = Array.from(map.values()).sort(
+                (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+              );
+              try {
+                localStorage.setItem('wedding_wishes_local', JSON.stringify(merged));
+              } catch {}
+              return merged;
+            });
+          }
+        }
+      } catch (err) {
+        console.warn('Failed to fetch from /api/wishes:', err);
+      }
+    };
+    fetchApiWishes();
+
+    // 3. Jika Supabase dikonfigurasi, gunakan juga Supabase + realtime
     const client = supabase;
     if (!isSupabaseConfigured || !client) return;
 
@@ -80,6 +110,24 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
       status,
       created_at: new Date().toISOString(),
     };
+
+    // Kirim ke backend API internal agar selalu tersimpan di server
+    if (typeof window !== 'undefined') {
+      try {
+        await fetch('/api/wishes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: newWish.name,
+            message: newWish.message,
+            status: newWish.status,
+            pax: status === 'hadir' ? pax : 0,
+          }),
+        });
+      } catch (err) {
+        console.warn('API post wish failed:', err);
+      }
+    }
 
     const client = supabase;
     if (isSupabaseConfigured && client) {
