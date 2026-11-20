@@ -44,7 +44,7 @@ export default function FloatingNavbar() {
   return (
     <nav
       aria-label="Bottom Navigation Dock"
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-white/90 backdrop-blur-md px-3 py-2 rounded-full border border-primary-200/80 shadow-xl shadow-primary-950/10 flex items-center gap-1 sm:gap-2 max-w-[92vw]"
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-white/80 backdrop-blur-lg px-3 py-2 rounded-full border border-white/90 shadow-2xl shadow-[#1e3325]/15 flex items-center gap-1 sm:gap-2 max-w-[92vw]"
     >
       {navItems.map((item) => {
         const Icon = item.icon;
@@ -54,14 +54,14 @@ export default function FloatingNavbar() {
             key={item.id}
             onClick={() => scrollToSection(item.id)}
             aria-label={item.label}
-            className={`flex flex-col items-center justify-center py-1.5 px-2.5 sm:px-3 rounded-full transition-all cursor-pointer ${
+            className={`flex flex-col items-center justify-center py-1.5 px-3 sm:px-3.5 rounded-full transition-all cursor-pointer ${
               isActive
-                ? 'bg-primary-800 text-white shadow-sm'
-                : 'text-stone-500 hover:text-primary-800 hover:bg-primary-50'
+                ? 'bg-[#2d4234] text-white shadow-md'
+                : 'text-stone-500 hover:text-[#2d4234] hover:bg-[#edf4f0]'
             }`}
           >
             <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-            <span className="text-[9px] sm:text-[10px] font-medium tracking-tight mt-0.5 hidden xs:inline">
+            <span className="text-[9px] sm:text-[10px] font-sans font-medium tracking-tight mt-0.5 hidden xs:inline">
               {item.label}
             </span>
           </button>

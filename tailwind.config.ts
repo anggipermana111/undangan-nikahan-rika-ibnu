@@ -9,43 +9,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        dreamy: {
+          sky: '#dbeef7',
+          skyDark: '#9cc7db',
+          cloud: '#fdebf1',
+          sage: '#4b6151',
+          forest: '#2d3d32',
+          moss: '#5c7362',
+          sand: '#f8f6f0',
+          paper: '#fdfbf7',
+        },
         primary: {
-          50: '#fdf8f6',
-          100: '#f2e8e5',
-          200: '#eaddd7',
-          300: '#e0cec7',
-          400: '#d2bab0',
-          500: '#bfa094',
-          600: '#a18277',
-          700: '#84675d',
-          800: '#6d544c',
-          900: '#59443e',
+          50: '#f4f7f5',
+          100: '#e5eee7',
+          200: '#cbdccf',
+          300: '#a7c3ae',
+          400: '#7ea488',
+          500: '#5c8667',
+          600: '#466c50',
+          700: '#395641',
+          800: '#2f4535',
+          900: '#28392d',
         },
         champagne: {
-          light: '#fbf8f2',
-          DEFAULT: '#e8dfd8',
-          dark: '#c4b5aa',
+          light: '#fbf8f4',
+          DEFAULT: '#eee8de',
+          dark: '#cfc4b6',
         },
-        sage: {
-          light: '#f2f5f3',
-          DEFAULT: '#8a9a86',
-          dark: '#586854',
-        },
-        gold: {
-          light: '#f9f3e5',
-          DEFAULT: '#d4af37',
-          dark: '#aa8c2c',
-        }
       },
       fontFamily: {
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        sans: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-cormorant)', 'Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['var(--font-dm-sans)', 'DM Sans', 'system-ui', 'sans-serif'],
+        script: ['var(--font-alex-brush)', 'Alex Brush', 'cursive'],
         cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'slide-up': 'slideUp 0.8s ease-out forwards',
         'spin-slow': 'spin 12s linear infinite',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -55,6 +57,10 @@ const config: Config = {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        floatSlow: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
         },
       },
     },

@@ -44,7 +44,7 @@ export default function CountdownTimer({ targetDateIso }: CountdownTimerProps) {
 
   if (timeLeft.isPast) {
     return (
-      <div className="py-6 px-4 bg-primary-100/50 rounded-2xl border border-primary-200 text-center text-primary-900 font-serif text-lg font-medium">
+      <div className="py-6 px-4 bg-white/80 rounded-2xl border border-[#cde0d5] text-center text-[#1e3325] font-serif text-lg font-medium shadow-sm">
         ✨ Hari Bahagia Telah Tiba ✨
       </div>
     );
@@ -62,12 +62,12 @@ export default function CountdownTimer({ targetDateIso }: CountdownTimerProps) {
       {items.map((item) => (
         <div
           key={item.label}
-          className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white/90 backdrop-blur-sm rounded-xl border border-primary-200 shadow-sm"
+          className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white/90 backdrop-blur-md rounded-2xl border border-[#cde0d5] shadow-md shadow-[#1e3325]/5"
         >
-          <span className="font-serif text-2xl sm:text-3xl font-semibold text-primary-900">
+          <span className="font-serif text-2xl sm:text-3xl font-semibold text-[#1e3325]">
             {String(item.value).padStart(2, '0')}
           </span>
-          <span className="text-[10px] sm:text-xs uppercase tracking-widest text-stone-500 font-medium mt-1">
+          <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#446250] font-sans font-semibold mt-1">
             {item.label}
           </span>
         </div>
