@@ -26,13 +26,16 @@ export default function EventSection({ events }: EventSectionProps) {
   const { akad, resepsi } = events;
 
   const createGoogleCalendarUrl = (event: WeddingEvent) => {
-    const startTime = event.dateIso.replace(/[-:]/g, '').split('+')[0] + 'Z';
-    const endDate = new Date(new Date(event.dateIso).getTime() + 4 * 60 * 60 * 1000);
-    const endTime = endDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    // Parse tanggal ISO dengan benar ke UTC untuk Google Calendar format YYYYMMDDTHHMMSSZ
+    const startDate = new Date(event.dateIso);
+    const endDate = new Date(startDate.getTime() + 4 * 60 * 60 * 1000);
+
+    const formatGCalTime = (d: Date) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
     const params = new URLSearchParams({
       action: 'TEMPLATE',
       text: event.calendarTitle,
-      dates: `${startTime}/${endTime}`,
+      dates: `${formatGCalTime(startDate)}/${formatGCalTime(endDate)}`,
       details: event.calendarDescription,
       location: `${event.venueName}, ${event.venueAddress}`,
     });

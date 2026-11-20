@@ -141,9 +141,9 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/50 via-transparent to-transparent" />
         </div>
 
-        {/* Couple Names */}
+        {/* Couple Names (Rika duluan baru Ibnu) */}
         <h1 className="font-script text-5xl sm:text-6xl text-[#1e3325] leading-tight drop-shadow-sm mb-1">
-          {weddingData.groom.nickName} & {weddingData.bride.nickName}
+          {weddingData.bride.nickName} & {weddingData.groom.nickName}
         </h1>
         <p className="text-[11px] uppercase tracking-[0.35em] text-[#2d4234] font-medium font-sans mb-5">
           03 . 12 . 2026
