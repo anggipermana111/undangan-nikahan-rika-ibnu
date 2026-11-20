@@ -36,7 +36,7 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
         </h1>
 
         <p className="text-sm font-sans tracking-widest text-stone-500 mb-8">
-          28 . 11 . 2026
+          03 . 12 . 2026
         </p>
 
         {/* Recipient Box */}
