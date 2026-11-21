@@ -77,16 +77,16 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
         </FadeUpDiv>
 
         {/* Couple Names Details (Bride first, then Groom) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 max-w-3xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 max-w-3xl mx-auto items-stretch px-2 sm:px-0">
           {/* Bride Card (Wanita di awal) */}
           <FadeUpDiv delay="fade-up-delay-3" className="h-full">
-            <div className="flex flex-col items-center justify-between h-full bg-white/70 backdrop-blur-md rounded-3xl p-7 sm:p-8 border border-white/90 shadow-lg shadow-[#1e3325]/5 hover:shadow-xl transition-all duration-300">
-              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
+            <div className="flex flex-col items-center justify-between h-full bg-white/70 backdrop-blur-md rounded-3xl p-5 sm:p-8 border border-white/90 shadow-lg shadow-[#1e3325]/5 hover:shadow-xl transition-all duration-300">
+              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-4">
                 The Bride
               </span>
 
-              <div className="my-auto text-center">
-                <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2 leading-tight">
+              <div className="my-auto text-center w-full">
+                <h3 className="font-serif text-[1.45rem] sm:text-3xl md:text-4xl font-semibold text-[#1e3325] mb-2 leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
                   {bride.fullName}
                 </h3>
                 <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
@@ -113,13 +113,13 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
 
           {/* Groom Card (Pria) */}
           <FadeUpDiv delay="fade-up-delay-4" className="h-full">
-            <div className="flex flex-col items-center justify-between h-full bg-white/70 backdrop-blur-md rounded-3xl p-7 sm:p-8 border border-white/90 shadow-lg shadow-[#1e3325]/5 hover:shadow-xl transition-all duration-300">
-              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-5">
+            <div className="flex flex-col items-center justify-between h-full bg-white/70 backdrop-blur-md rounded-3xl p-5 sm:p-8 border border-white/90 shadow-lg shadow-[#1e3325]/5 hover:shadow-xl transition-all duration-300">
+              <span className="px-4 py-1.5 bg-[#2d4234] text-white rounded-full text-[10px] tracking-widest uppercase font-sans font-semibold shadow-sm mb-4">
                 The Groom
               </span>
 
-              <div className="my-auto text-center">
-                <h3 className="font-serif text-3xl sm:text-4xl font-semibold text-[#1e3325] mb-2 leading-tight">
+              <div className="my-auto text-center w-full">
+                <h3 className="font-serif text-[1.45rem] sm:text-3xl md:text-4xl font-semibold text-[#1e3325] mb-2 leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
                   {groom.fullName}
                 </h3>
                 <p className="text-xs uppercase tracking-wider text-[#43624f] mb-2 font-medium font-sans">
