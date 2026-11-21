@@ -56,28 +56,26 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
       />
 
       {/* ── LAYER 2: Pink clouds (slow drift) ── */}
-      <div
-        className="parallax-layer animate-float-slow opacity-80"
+      <img
+        src="/themes/dreamy/pink-cloud.webp"
+        alt=""
+        aria-hidden="true"
+        className="parallax-layer animate-float-slow opacity-80 pointer-events-none select-none object-contain"
         style={{
-          backgroundImage: `url('/themes/dreamy/pink-cloud.webp')`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
           width: '340px',
-          height: '200px',
           top: '8%',
           right: '-2%',
           transform: `translateY(${scrollY * 0.05}px)`,
         }}
       />
       {/* Second cloud, left side */}
-      <div
-        className="parallax-layer animate-float-medium opacity-50"
+      <img
+        src="/themes/dreamy/pink-cloud.webp"
+        alt=""
+        aria-hidden="true"
+        className="parallax-layer animate-float-medium opacity-50 pointer-events-none select-none object-contain"
         style={{
-          backgroundImage: `url('/themes/dreamy/pink-cloud.webp')`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
           width: '220px',
-          height: '140px',
           top: '14%',
           left: '-3%',
           transform: `translateY(${scrollY * 0.03}px) scaleX(-1)`,
@@ -85,12 +83,12 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
       />
 
       {/* ── LAYER 3: Tree top overlay ── */}
-      <div
-        className="parallax-layer animate-sway opacity-90"
+      <img
+        src="/themes/dreamy/tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="parallax-layer animate-sway opacity-90 pointer-events-none select-none object-cover object-top"
         style={{
-          backgroundImage: `url('/themes/dreamy/tree.webp')`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
           width: '110%',
           height: '220px',
           top: '-10px',
@@ -176,15 +174,13 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
       </div>
 
       {/* ── LAYER 5: Big tree left ── */}
-      <div
-        className="parallax-layer opacity-85"
+      <img
+        src="/themes/dreamy/big-tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="parallax-layer opacity-85 pointer-events-none select-none object-contain object-bottom-left"
         style={{
-          backgroundImage: `url('/themes/dreamy/big-tree.webp')`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'bottom left',
           width: '220px',
-          height: '400px',
           bottom: 0,
           left: 0,
           transform: `translateY(${scrollY * 0.18}px)`,
@@ -192,14 +188,14 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
       />
 
       {/* ── LAYER 6: Greenery silhouette bottom (fastest) ── */}
-      <div
-        className="parallax-layer opacity-95"
+      <img
+        src="/themes/dreamy/greenery.webp"
+        alt=""
+        aria-hidden="true"
+        className="parallax-layer opacity-95 pointer-events-none select-none object-cover object-bottom"
         style={{
-          backgroundImage: `url('/themes/dreamy/greenery.webp')`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'bottom center',
           height: '100px',
+          width: '100%',
           bottom: 0,
           left: 0,
           right: 0,

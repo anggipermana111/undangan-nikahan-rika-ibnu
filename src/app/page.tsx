@@ -78,22 +78,27 @@ function WeddingContent() {
         {/* 7. Footer */}
         <footer className="relative py-20 px-4 bg-[#1e2f24] text-white text-center pb-28 overflow-hidden">
           {/* Greenery top overlay */}
-          <div
-            className="absolute top-0 inset-x-0 h-20 bg-top bg-repeat-x bg-contain pointer-events-none opacity-30"
-            style={{ backgroundImage: `url('/themes/dreamy/greenery.webp')` }}
+          <img
+            src="/themes/dreamy/greenery.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute top-0 inset-x-0 w-full pointer-events-none opacity-30 select-none object-cover object-top"
+            style={{ height: '80px' }}
           />
           {/* Big tree left silhouette */}
-          <div
-            className="absolute bottom-0 left-0 w-44 h-72 bg-contain bg-no-repeat bg-left-bottom pointer-events-none opacity-20"
-            style={{ backgroundImage: `url('/themes/dreamy/big-tree.webp')` }}
+          <img
+            src="/themes/dreamy/big-tree.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-0 left-0 w-44 pointer-events-none opacity-20 select-none object-contain object-bottom-left"
           />
           {/* Big tree right silhouette (mirrored) */}
-          <div
-            className="absolute bottom-0 right-0 w-44 h-72 bg-contain bg-no-repeat bg-right-bottom pointer-events-none opacity-20"
-            style={{
-              backgroundImage: `url('/themes/dreamy/big-tree.webp')`,
-              transform: 'scaleX(-1)',
-            }}
+          <img
+            src="/themes/dreamy/big-tree.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-0 right-0 w-44 pointer-events-none opacity-20 select-none object-contain object-bottom-right"
+            style={{ transform: 'scaleX(-1)' }}
           />
 
           <div className="relative max-w-md mx-auto space-y-6 z-10">
@@ -105,7 +110,7 @@ function WeddingContent() {
             </div>
 
             <p className="font-script text-4xl sm:text-5xl text-white leading-tight">
-              {weddingData.groom.nickName} & {weddingData.bride.nickName}
+              {weddingData.bride.nickName} & {weddingData.groom.nickName}
             </p>
 
             <div className="flex items-center justify-center gap-3">

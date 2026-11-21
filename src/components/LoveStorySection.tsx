@@ -30,16 +30,18 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
       />
 
       {/* Tree branch decorations */}
-      <div
-        className="absolute top-0 right-0 w-72 h-40 bg-contain bg-no-repeat pointer-events-none opacity-25"
-        style={{
-          backgroundImage: `url('/themes/dreamy/tree.webp')`,
-          transform: 'scaleX(-1)',
-        }}
+      <img
+        src="/themes/dreamy/tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute top-0 right-0 w-72 max-w-[45%] pointer-events-none opacity-25 object-contain object-top-right select-none"
+        style={{ transform: 'scaleX(-1)' }}
       />
-      <div
-        className="absolute bottom-10 left-0 w-56 h-32 bg-contain bg-no-repeat pointer-events-none opacity-20"
-        style={{ backgroundImage: `url('/themes/dreamy/big-tree.webp')` }}
+      <img
+        src="/themes/dreamy/big-tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-10 left-0 w-56 max-w-[35%] pointer-events-none opacity-20 object-contain object-bottom-left select-none"
       />
 
       <div className="relative max-w-2xl mx-auto z-10">

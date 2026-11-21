@@ -30,17 +30,19 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
       />
 
       {/* Tree branch top-left */}
-      <div
-        className="absolute -top-4 -left-10 w-[55%] h-48 bg-contain bg-no-repeat pointer-events-none opacity-50"
-        style={{ backgroundImage: `url('/themes/dreamy/tree.webp')` }}
+      <img
+        src="/themes/dreamy/tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute -top-4 -left-10 w-[55%] max-w-sm pointer-events-none opacity-50 object-contain object-top select-none"
       />
       {/* Tree branch top-right (mirrored) */}
-      <div
-        className="absolute -top-4 -right-10 w-[40%] h-36 bg-contain bg-no-repeat pointer-events-none opacity-30"
-        style={{
-          backgroundImage: `url('/themes/dreamy/tree.webp')`,
-          transform: 'scaleX(-1)',
-        }}
+      <img
+        src="/themes/dreamy/tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute -top-4 -right-10 w-[40%] max-w-xs pointer-events-none opacity-30 object-contain object-top select-none"
+        style={{ transform: 'scaleX(-1)' }}
       />
 
       <div className="relative max-w-4xl mx-auto z-10">
@@ -147,9 +149,12 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
       </div>
 
       {/* Foreground flower bottom decoration */}
-      <div
-        className="absolute bottom-0 inset-x-0 h-20 bg-bottom bg-repeat-x bg-contain pointer-events-none opacity-40 z-10"
-        style={{ backgroundImage: `url('/themes/dreamy/foregroundFlower.webp')` }}
+      <img
+        src="/themes/dreamy/foregroundFlower.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-0 inset-x-0 w-full pointer-events-none opacity-40 z-10 select-none object-cover object-bottom"
+        style={{ height: '80px' }}
       />
     </section>
   );

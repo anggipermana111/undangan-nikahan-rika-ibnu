@@ -59,9 +59,11 @@ export default function GallerySection({ images }: GallerySectionProps) {
       />
 
       {/* Top tree branch */}
-      <div
-        className="absolute top-0 left-0 w-72 h-40 bg-contain bg-no-repeat pointer-events-none opacity-35"
-        style={{ backgroundImage: `url('/themes/dreamy/tree.webp')` }}
+      <img
+        src="/themes/dreamy/tree.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute top-0 left-0 w-72 max-w-[45%] pointer-events-none opacity-35 object-contain object-top-left select-none"
       />
 
       <div className="relative max-w-5xl mx-auto z-10">
@@ -155,9 +157,12 @@ export default function GallerySection({ images }: GallerySectionProps) {
       )}
 
       {/* Bottom greenery */}
-      <div
-        className="absolute bottom-0 inset-x-0 h-24 bg-bottom bg-repeat-x bg-contain pointer-events-none opacity-70 z-0"
-        style={{ backgroundImage: `url('/themes/dreamy/greenery.webp')` }}
+      <img
+        src="/themes/dreamy/greenery.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-0 inset-x-0 w-full pointer-events-none opacity-70 z-0 select-none object-cover object-bottom"
+        style={{ height: '96px' }}
       />
     </section>
   );
