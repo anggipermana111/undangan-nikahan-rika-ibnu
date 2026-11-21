@@ -116,7 +116,7 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
 
       {/* ── TOP LABEL ── */}
       <div className="relative pt-14 z-20 animate-fade-in px-4">
-        <p className="text-[11px] sm:text-xs uppercase tracking-[0.4em] text-[#1e3325] font-semibold drop-shadow-sm font-sans">
+        <p className="text-[11px] sm:text-xs uppercase tracking-[0.4em] text-white font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] font-sans">
           The Wedding of
         </p>
       </div>
@@ -134,18 +134,18 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
           }}
         >
           <img
-            src="/images/photo-3.jpg"
-            alt="Ibnu & Rika"
+            src="/images/cover-photo.jpeg"
+            alt="Rika & Ibnu"
             className="w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/50 via-transparent to-transparent" />
         </div>
 
-        {/* Couple Names (Rika duluan baru Ibnu) */}
-        <h1 className="font-script text-5xl sm:text-6xl text-[#1e3325] leading-tight drop-shadow-sm mb-1">
+        {/* Couple Names (Rika duluan baru Ibnu, warna putih dengan drop-shadow jelas) */}
+        <h1 className="font-script text-5xl sm:text-6xl text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] mb-1">
           {weddingData.bride.nickName} & {weddingData.groom.nickName}
         </h1>
-        <p className="text-[11px] uppercase tracking-[0.35em] text-[#2d4234] font-medium font-sans mb-5">
+        <p className="text-[11px] uppercase tracking-[0.35em] text-white font-semibold font-sans drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] mb-5">
           03 . 12 . 2026
         </p>
 
@@ -208,8 +208,8 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
       />
 
       {/* ── HASHTAG FOOTER ── */}
-      <div className="relative pb-5 z-20 text-[11px] text-[#1e3325] font-sans tracking-[0.3em] font-bold drop-shadow">
-        <p>{weddingData.hashtag ?? '#IbnuRika2026'}</p>
+      <div className="relative pb-5 z-20 text-[11px] text-white font-sans tracking-[0.3em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+        <p>{weddingData.hashtag ?? '#RikaIbnu2026'}</p>
       </div>
     </div>
   );

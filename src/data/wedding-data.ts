@@ -121,5 +121,5 @@ export const weddingData: WeddingData = {
   },
   audioSrc: '/audio.mp3',
   liveStreamingUrl: undefined,
-  hashtag: '#IbnuRika2026',
+  hashtag: '#RikaIbnu2026',
 };
