@@ -44,24 +44,6 @@ export default function EventSection({ events }: EventSectionProps) {
 
   return (
     <section id="event" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
-      {/* Floral top divider */}
-      <img
-        src="/themes/dreamy/foregroundFlower.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute top-0 inset-x-0 w-full pointer-events-none opacity-20 z-10 select-none object-cover object-top"
-        style={{ height: '64px' }}
-      />
-
-      {/* Tree branch top-right */}
-      <img
-        src="/themes/dreamy/tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-72 max-w-[45%] pointer-events-none opacity-30 object-contain object-top-right select-none"
-        style={{ transform: 'scaleX(-1)' }}
-      />
-
       <div className="relative max-w-4xl mx-auto z-10">
         {/* Section header */}
         <FadeUpDiv>
@@ -206,15 +188,6 @@ export default function EventSection({ events }: EventSectionProps) {
           </FadeUpDiv>
         </div>
       </div>
-
-      {/* Bottom greenery */}
-      <img
-        src="/themes/dreamy/greenery.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute bottom-0 inset-x-0 w-full pointer-events-none opacity-20 z-0 select-none object-cover object-bottom"
-        style={{ height: '80px' }}
-      />
     </section>
   );
 }

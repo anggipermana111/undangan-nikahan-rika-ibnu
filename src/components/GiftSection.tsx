@@ -33,12 +33,6 @@ export default function GiftSection({ bankAccounts, giftAddress }: GiftSectionPr
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-[#1e3325]/65 pointer-events-none" />
 
-      {/* Foreground flower top */}
-      <div
-        className="absolute top-0 inset-x-0 h-20 bg-top bg-repeat-x bg-contain pointer-events-none opacity-20 z-10"
-        style={{ backgroundImage: `url('/themes/dreamy/foregroundFlower.webp')` }}
-      />
-
       <div className="relative max-w-2xl mx-auto z-10">
         {/* Header */}
         <FadeUpDiv>

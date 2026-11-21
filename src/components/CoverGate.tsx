@@ -40,65 +40,21 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
     <div
       ref={containerRef}
       className="fixed inset-0 z-50 flex flex-col items-center justify-between text-center select-none overflow-hidden"
-      style={{ background: '#c8e8f4' }}
     >
-      {/* ── LAYER 1: Sky background (slowest parallax) ── */}
+      {/* ── LAYER 1: Single full cover background ── */}
       <div
         className="parallax-layer inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/themes/dreamy/sky.webp')`,
-          transform: `translateY(${scrollY * 0.08}px)`,
-          top: '-10%',
-          bottom: '-10%',
+          backgroundImage: `url('/themes/dreamy/main-bg.webp')`,
+          transform: `translateY(${scrollY * 0.05}px)`,
+          top: '-5%',
+          bottom: '-5%',
           left: 0,
           right: 0,
         }}
       />
 
-      {/* ── LAYER 2: Pink clouds (slow drift) ── */}
-      <img
-        src="/themes/dreamy/pink-cloud.webp"
-        alt=""
-        aria-hidden="true"
-        className="parallax-layer animate-float-slow opacity-80 pointer-events-none select-none object-contain"
-        style={{
-          width: '340px',
-          top: '8%',
-          right: '-2%',
-          transform: `translateY(${scrollY * 0.05}px)`,
-        }}
-      />
-      {/* Second cloud, left side */}
-      <img
-        src="/themes/dreamy/pink-cloud.webp"
-        alt=""
-        aria-hidden="true"
-        className="parallax-layer animate-float-medium opacity-50 pointer-events-none select-none object-contain"
-        style={{
-          width: '220px',
-          top: '14%',
-          left: '-3%',
-          transform: `translateY(${scrollY * 0.03}px) scaleX(-1)`,
-        }}
-      />
-
-      {/* ── LAYER 3: Tree top overlay ── */}
-      <img
-        src="/themes/dreamy/tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="parallax-layer animate-sway opacity-90 pointer-events-none select-none object-cover object-top"
-        style={{
-          width: '110%',
-          height: '220px',
-          top: '-10px',
-          left: '-5%',
-          transformOrigin: 'top left',
-          transform: `translateY(${scrollY * 0.12}px)`,
-        }}
-      />
-
-      {/* ── LAYER 4: Lottie bird animation ── */}
+      {/* ── LAYER 2: Lottie bird animation ── */}
       {birdData && (
         <div
           className="parallax-layer z-10"
@@ -172,36 +128,6 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
           </svg>
         </button>
       </div>
-
-      {/* ── LAYER 5: Big tree left ── */}
-      <img
-        src="/themes/dreamy/big-tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="parallax-layer opacity-85 pointer-events-none select-none object-contain object-bottom-left"
-        style={{
-          width: '220px',
-          bottom: 0,
-          left: 0,
-          transform: `translateY(${scrollY * 0.18}px)`,
-        }}
-      />
-
-      {/* ── LAYER 6: Greenery silhouette bottom (fastest) ── */}
-      <img
-        src="/themes/dreamy/greenery.webp"
-        alt=""
-        aria-hidden="true"
-        className="parallax-layer opacity-95 pointer-events-none select-none object-cover object-bottom"
-        style={{
-          height: '100px',
-          width: '100%',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          transform: `translateY(${scrollY * 0.22}px)`,
-        }}
-      />
 
       {/* ── HASHTAG FOOTER ── */}
       <div className="relative pb-5 z-20 text-[11px] text-white font-sans tracking-[0.3em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">

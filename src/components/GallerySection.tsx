@@ -52,20 +52,6 @@ export default function GallerySection({ images }: GallerySectionProps) {
 
   return (
     <section id="gallery" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
-      {/* Sky wash */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none"
-        style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
-      />
-
-      {/* Top tree branch */}
-      <img
-        src="/themes/dreamy/tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute top-0 left-0 w-72 max-w-[45%] pointer-events-none opacity-35 object-contain object-top-left select-none"
-      />
-
       <div className="relative max-w-5xl mx-auto z-10">
         {/* Header */}
         <div ref={headerRef} className={`fade-up ${headerVisible ? 'visible' : ''} mb-14`}>
@@ -155,15 +141,6 @@ export default function GallerySection({ images }: GallerySectionProps) {
           </button>
         </div>
       )}
-
-      {/* Bottom greenery */}
-      <img
-        src="/themes/dreamy/greenery.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute bottom-0 inset-x-0 w-full pointer-events-none opacity-70 z-0 select-none object-cover object-bottom"
-        style={{ height: '96px' }}
-      />
     </section>
   );
 }

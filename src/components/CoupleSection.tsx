@@ -23,28 +23,6 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
 
   return (
     <section id="couple" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
-      {/* Sky wash background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-40 pointer-events-none"
-        style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
-      />
-
-      {/* Tree branch top-left */}
-      <img
-        src="/themes/dreamy/tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute -top-4 -left-10 w-[55%] max-w-sm pointer-events-none opacity-50 object-contain object-top select-none"
-      />
-      {/* Tree branch top-right (mirrored) */}
-      <img
-        src="/themes/dreamy/tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute -top-4 -right-10 w-[40%] max-w-xs pointer-events-none opacity-30 object-contain object-top select-none"
-        style={{ transform: 'scaleX(-1)' }}
-      />
-
       <div className="relative max-w-4xl mx-auto z-10">
         {/* Opening / Bismillah */}
         <FadeUpDiv>
@@ -147,15 +125,6 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
           </FadeUpDiv>
         </div>
       </div>
-
-      {/* Foreground flower bottom decoration */}
-      <img
-        src="/themes/dreamy/foregroundFlower.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute bottom-0 inset-x-0 w-full pointer-events-none opacity-40 z-10 select-none object-cover object-bottom"
-        style={{ height: '80px' }}
-      />
     </section>
   );
 }

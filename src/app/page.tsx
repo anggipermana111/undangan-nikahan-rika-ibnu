@@ -38,7 +38,12 @@ function WeddingContent() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#dbeef7] via-[#eaf4f7] to-[#dbeef7] selection:bg-emerald-100 selection:text-emerald-900">
+    <div
+      className="relative min-h-screen bg-cover bg-center bg-fixed selection:bg-emerald-100 selection:text-emerald-900"
+      style={{
+        backgroundImage: `url('/themes/dreamy/main-bg.webp')`,
+      }}
+    >
       {/* Cover Gate Overlay */}
       {!isOpen && (
         <CoverGate guestName={guestName} onOpen={handleOpen} />
@@ -77,30 +82,6 @@ function WeddingContent() {
 
         {/* 7. Footer */}
         <footer className="relative py-20 px-4 bg-[#1e2f24] text-white text-center pb-28 overflow-hidden">
-          {/* Greenery top overlay */}
-          <img
-            src="/themes/dreamy/greenery.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute top-0 inset-x-0 w-full pointer-events-none opacity-30 select-none object-cover object-top"
-            style={{ height: '80px' }}
-          />
-          {/* Big tree left silhouette */}
-          <img
-            src="/themes/dreamy/big-tree.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 w-44 pointer-events-none opacity-20 select-none object-contain object-bottom-left"
-          />
-          {/* Big tree right silhouette (mirrored) */}
-          <img
-            src="/themes/dreamy/big-tree.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute bottom-0 right-0 w-44 pointer-events-none opacity-20 select-none object-contain object-bottom-right"
-            style={{ transform: 'scaleX(-1)' }}
-          />
-
           <div className="relative max-w-md mx-auto space-y-6 z-10">
             {/* Heart ornament */}
             <div className="flex justify-center">

@@ -23,27 +23,6 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
 
   return (
     <section id="story" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
-      {/* Bg sky tint */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none"
-        style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
-      />
-
-      {/* Tree branch decorations */}
-      <img
-        src="/themes/dreamy/tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-72 max-w-[45%] pointer-events-none opacity-25 object-contain object-top-right select-none"
-        style={{ transform: 'scaleX(-1)' }}
-      />
-      <img
-        src="/themes/dreamy/big-tree.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute bottom-10 left-0 w-56 max-w-[35%] pointer-events-none opacity-20 object-contain object-bottom-left select-none"
-      />
-
       <div className="relative max-w-2xl mx-auto z-10">
         {/* Section Header */}
         <FadeUpItem>
