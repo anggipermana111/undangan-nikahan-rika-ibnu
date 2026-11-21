@@ -185,10 +185,10 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
   };
 
   return (
-    <section id="rsvp" className="relative py-24 px-4 bg-[#f1f6f4] text-center overflow-hidden">
+    <section id="rsvp" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       {/* Sky backdrop */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none"
+        className="absolute inset-0 bg-cover bg-center opacity-25 pointer-events-none"
         style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
       />
 

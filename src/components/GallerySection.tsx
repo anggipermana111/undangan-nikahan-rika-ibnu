@@ -51,10 +51,10 @@ export default function GallerySection({ images }: GallerySectionProps) {
   ];
 
   return (
-    <section id="gallery" className="relative py-24 px-4 text-center overflow-hidden bg-[#dbeef7]">
+    <section id="gallery" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       {/* Sky wash */}
       <div
-        className="absolute inset-0 bg-cover bg-top opacity-50 pointer-events-none"
+        className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none"
         style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
       />
 

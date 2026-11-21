@@ -44,12 +44,12 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
     >
       {/* ── LAYER 1: Sky background (slowest parallax) ── */}
       <div
-        className="parallax-layer inset-0 bg-cover bg-top"
+        className="parallax-layer inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url('/themes/dreamy/sky.webp')`,
           transform: `translateY(${scrollY * 0.08}px)`,
-          top: '-5%',
-          bottom: '-5%',
+          top: '-10%',
+          bottom: '-10%',
           left: 0,
           right: 0,
         }}

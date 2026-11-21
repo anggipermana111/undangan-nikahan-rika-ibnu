@@ -38,7 +38,7 @@ function WeddingContent() {
   };
 
   return (
-    <div className="relative min-h-screen selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#dbeef7] via-[#eaf4f7] to-[#dbeef7] selection:bg-emerald-100 selection:text-emerald-900">
       {/* Cover Gate Overlay */}
       {!isOpen && (
         <CoverGate guestName={guestName} onOpen={handleOpen} />

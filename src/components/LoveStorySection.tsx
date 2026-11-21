@@ -22,7 +22,7 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
   if (!data || data.length === 0) return null;
 
   return (
-    <section id="story" className="relative py-24 px-4 text-center overflow-hidden bg-[#f0f7f3]">
+    <section id="story" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       {/* Bg sky tint */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none"

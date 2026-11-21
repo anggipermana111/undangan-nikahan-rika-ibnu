@@ -43,10 +43,10 @@ export default function EventSection({ events }: EventSectionProps) {
   };
 
   return (
-    <section id="event" className="relative py-24 px-4 text-center overflow-hidden bg-white">
+    <section id="event" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       {/* Floral top divider */}
       <div
-        className="absolute top-0 inset-x-0 h-20 bg-top bg-repeat-x bg-contain pointer-events-none opacity-25 z-10"
+        className="absolute top-0 inset-x-0 h-16 bg-top bg-repeat-x bg-contain pointer-events-none opacity-20 z-10"
         style={{ backgroundImage: `url('/themes/dreamy/foregroundFlower.webp')` }}
       />
 

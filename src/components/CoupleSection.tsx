@@ -22,10 +22,10 @@ export default function CoupleSection({ data }: CoupleSectionProps) {
   const { groom, bride } = data;
 
   return (
-    <section id="couple" className="relative py-24 px-4 text-center overflow-hidden bg-[#dbeef7]">
+    <section id="couple" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       {/* Sky wash background */}
       <div
-        className="absolute inset-0 bg-cover bg-top opacity-60 pointer-events-none"
+        className="absolute inset-0 bg-cover bg-center opacity-40 pointer-events-none"
         style={{ backgroundImage: `url('/themes/dreamy/sky.webp')` }}
       />
 
