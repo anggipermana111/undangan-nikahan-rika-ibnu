@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Send, CheckCircle2, MessageSquare, Users, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle2, Users, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import Card from './ui/Card';
+import Sparkles from './ui/Sparkles';
 import confetti from 'canvas-confetti';
 import {
   supabase,
@@ -20,6 +22,7 @@ interface RsvpWishesSectionProps {
 const WISHES_LIMIT = 100;
 // Short cooldown after a successful submit to discourage accidental double posts.
 const SUBMIT_COOLDOWN_MS = 30_000;
+export const WISHES_PAGE_SIZE = 5;
 
 function prependUnique(list: WishRecord[], wish: WishRecord): WishRecord[] {
   if (list.some((w) => w.id === wish.id)) return list;
@@ -48,6 +51,11 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
   const [error, setError] = useState<string | null>(null);
   const [wishes, setWishes] = useState<WishRecord[]>([]);
   const [loading, setLoading] = useState(isSupabaseConfigured);
+  const [page, setPage] = useState(0);
+  const totalPages = Math.max(1, Math.ceil(wishes.length / WISHES_PAGE_SIZE));
+  // Clamp so a shrinking list never leaves us past the last page
+  const currentPage = Math.min(page, totalPages - 1);
+  const visibleWishes = wishes.slice(currentPage * WISHES_PAGE_SIZE, (currentPage + 1) * WISHES_PAGE_SIZE);
 
   useEffect(() => {
     if (guestName) setName(guestName.slice(0, WISH_NAME_MAX));
@@ -132,6 +140,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
     }
 
     setWishes((prev) => prependUnique(prev, data as WishRecord));
+    setPage(0);
     setMessage('');
     setSubmitted(true);
     setCooldown(true);
@@ -147,26 +156,24 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
       ? 'Terima Kasih!'
       : 'Kirim Ucapan & Konfirmasi';
 
-  return (
-    <section id="rsvp" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
-      <div className="relative max-w-3xl mx-auto z-10">
-        <p className="text-[11px] uppercase tracking-[0.35em] text-[#3f5d4a] font-medium font-sans mb-2">
-          Konfirmasi Kehadiran & Doa
-        </p>
-        <h2 className="font-serif text-3xl sm:text-5xl text-[#1e3325] mb-4">
-          RSVP & Wishes
-        </h2>
-        <p className="text-sm text-stone-600 mb-14 max-w-md mx-auto font-sans leading-relaxed">
-          Kehadiran dan doa restu Anda merupakan kehormatan dan kebahagiaan yang tak ternilai bagi kami.
-        </p>
+  const label = 'mb-2 block font-sans text-xs font-semibold text-ink';
+  const field =
+    'w-full rounded-xl border border-cream-100 bg-white px-4 py-3 font-sans text-sm text-ink focus:border-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-700/20';
 
-        {/* RSVP Form Card */}
-        <div className="bg-white/90 backdrop-blur-md rounded-3xl p-7 sm:p-9 border border-[#cde0d5] shadow-xl shadow-[#1e3325]/5 text-left mb-16">
-          <form onSubmit={handleSubmit} className="space-y-6">
+  return (
+    <section id="rsvp" className="relative overflow-hidden bg-forest-900 px-5 py-16">
+      <Sparkles />
+      <div className="relative z-10">
+        <Card className="px-6 py-10">
+          <img src="/themes/forest/sprig.webp" alt="" aria-hidden="true" className="mx-auto mb-3 w-10" />
+          <h2 className="text-center font-script text-4xl text-forest-900">Ucapkan Sesuatu</h2>
+          <p className="mt-2 text-center font-sans text-xs text-sage-500">
+            Konfirmasi kehadiran dan kirimkan doa terbaik untuk kedua mempelai.
+          </p>
+
+          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <div>
-              <label htmlFor="name" className="block text-xs font-sans font-semibold uppercase tracking-wider text-stone-700 mb-2">
-                Nama Lengkap
-              </label>
+              <label htmlFor="name" className={label}>Nama Lengkap</label>
               <input
                 id="name"
                 type="text"
@@ -175,167 +182,151 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Masukkan nama Anda"
-                className="w-full px-4 py-3.5 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-[#3b5945]/30 focus:border-[#3b5945] text-stone-800 text-sm font-sans transition-all"
+                className={field}
               />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <span className="block text-xs font-sans font-semibold uppercase tracking-wider text-stone-700 mb-2">
-                  Konfirmasi Kehadiran
-                </span>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setStatus('hadir')}
-                    aria-pressed={status === 'hadir'}
-                    className={`py-3 px-3 rounded-2xl text-xs font-sans font-medium tracking-wider uppercase border transition-all cursor-pointer ${
-                      status === 'hadir'
-                        ? 'bg-[#2d4234] text-white border-[#2d4234] shadow-sm'
-                        : 'bg-stone-50 text-stone-600 border-stone-200 hover:bg-stone-100'
-                    }`}
-                  >
-                    Hadir
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStatus('tidak_hadir')}
-                    aria-pressed={status === 'tidak_hadir'}
-                    className={`py-3 px-3 rounded-2xl text-xs font-sans font-medium tracking-wider uppercase border transition-all cursor-pointer ${
-                      status === 'tidak_hadir'
-                        ? 'bg-stone-800 text-white border-stone-800 shadow-sm'
-                        : 'bg-stone-50 text-stone-600 border-stone-200 hover:bg-stone-100'
-                    }`}
-                  >
-                    Berhalangan
-                  </button>
-                </div>
-              </div>
-
-              {status === 'hadir' && (
-                <div>
-                  <label htmlFor="pax" className="block text-xs font-sans font-semibold uppercase tracking-wider text-stone-700 mb-2">
-                    Jumlah Tamu (Pax)
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="pax"
-                      value={pax}
-                      onChange={(e) => setPax(Number(e.target.value))}
-                      className="w-full px-4 py-3 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-[#3b5945]/30 focus:border-[#3b5945] text-stone-800 text-sm font-sans transition-all appearance-none bg-white"
-                    >
-                      {Array.from({ length: WISH_PAX_MAX }, (_, i) => i + 1).map((n) => (
-                        <option key={n} value={n}>{n} Orang</option>
-                      ))}
-                    </select>
-                    <Users className="w-4 h-4 text-stone-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  </div>
-                </div>
-              )}
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-xs font-sans font-semibold uppercase tracking-wider text-stone-700 mb-2">
-                Doa & Ucapan
-              </label>
+              <label htmlFor="message" className={label}>Doa &amp; Ucapan</label>
               <textarea
                 id="message"
                 required
-                rows={3}
+                rows={4}
                 maxLength={WISH_MESSAGE_MAX}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Tuliskan doa dan ucapan selamat untuk Rika & Ibnu..."
-                className="w-full px-4 py-3.5 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-[#3b5945]/30 focus:border-[#3b5945] text-stone-800 text-sm font-sans transition-all resize-none"
+                placeholder="Berikan ucapan & doa untuk Rika & Ibnu"
+                className={`${field} resize-none`}
               />
-              <p className="mt-1 text-right text-[10px] text-stone-400 font-sans">
+              <p className="mt-1 text-right font-sans text-[10px] text-sage-500">
                 {message.length}/{WISH_MESSAGE_MAX}
               </p>
             </div>
 
+            <div>
+              <span className={label}>Konfirmasi Kehadiran</span>
+              <div className="grid grid-cols-2 gap-2">
+                {(['hadir', 'tidak_hadir'] as const).map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => setStatus(s)}
+                    aria-pressed={status === s}
+                    className={`rounded-xl border py-2.5 font-sans text-xs font-semibold transition-all ${
+                      status === s
+                        ? 'border-forest-900 bg-forest-900 text-cream-50'
+                        : 'border-cream-100 bg-white text-sage-500 hover:border-forest-700'
+                    }`}
+                  >
+                    {s === 'hadir' ? 'Hadir' : 'Tidak Hadir'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {status === 'hadir' && (
+              <div>
+                <label htmlFor="pax" className={label}>Jumlah Tamu</label>
+                <div className="relative">
+                  <select
+                    id="pax"
+                    value={pax}
+                    onChange={(e) => setPax(Number(e.target.value))}
+                    className={`${field} appearance-none`}
+                  >
+                    {Array.from({ length: WISH_PAX_MAX }, (_, i) => i + 1).map((n) => (
+                      <option key={n} value={n}>{n} Orang</option>
+                    ))}
+                  </select>
+                  <Users className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-sage-500" aria-hidden="true" />
+                </div>
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={submitting || cooldown}
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 bg-[#2d4234] hover:bg-[#1e2f24] active:scale-95 text-white font-sans font-medium text-xs tracking-widest uppercase rounded-full shadow-lg shadow-[#2d4234]/20 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-forest-900 py-3 font-sans text-sm font-semibold text-cream-50 shadow-md transition-all hover:bg-forest-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <Send className="w-4 h-4 text-emerald-200" />
-              <span>{buttonLabel}</span>
+              <Send className="h-4 w-4" aria-hidden="true" />
+              {buttonLabel}
             </button>
           </form>
 
           {submitted && (
-            <div role="status" className="mt-5 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 text-emerald-800 text-xs font-sans animate-fade-in">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <div role="status" className="mt-5 flex items-center gap-3 rounded-xl border border-forest-700/30 bg-forest-900/5 p-4 font-sans text-xs text-forest-900 animate-fade-in">
+              <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
               <span>Terima kasih! Ucapan dan konfirmasi kehadiran Anda telah berhasil tersimpan.</span>
             </div>
           )}
 
           {error && (
-            <div role="alert" className="mt-5 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3 text-red-800 text-xs font-sans animate-fade-in">
-              <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+            <div role="alert" className="mt-5 flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-4 font-sans text-xs text-red-800 animate-fade-in">
+              <AlertCircle className="h-5 w-5 shrink-0 text-red-600" aria-hidden="true" />
               <span>{error}</span>
             </div>
           )}
-        </div>
 
-        {/* Wishes Feed List */}
-        <div className="text-left">
-          <div className="flex items-center gap-2.5 mb-6">
-            <MessageSquare className="w-5 h-5 text-[#2d4234]" />
-            <h3 className="font-serif text-2xl font-semibold text-[#1e3325]">
-              Doa & Ucapan ({wishes.length})
+          <div className="mt-10 border-t border-cream-100 pt-6">
+            <h3 className="font-display text-sm uppercase tracking-wider text-forest-900">
+              Doa &amp; Ucapan ({wishes.length})
             </h3>
-          </div>
 
-          <div className="space-y-4 max-h-[480px] overflow-y-auto pr-2">
-            {loading ? (
-              <div className="py-8 px-6 text-center rounded-3xl bg-white/70 border border-[#d6e5dd] text-stone-500 font-sans text-sm">
-                Memuat doa & ucapan...
-              </div>
-            ) : wishes.length === 0 ? (
-              <div className="py-8 px-6 text-center rounded-3xl bg-white/70 border border-[#d6e5dd] text-stone-500 font-sans text-sm">
-                Belum ada doa & ucapan. Jadilah yang pertama memberikan doa restu untuk kedua mempelai! ✨
-              </div>
-            ) : (
-              wishes.map((item) => (
-                <div
-                  key={item.id}
-                  className="p-6 rounded-3xl bg-white/90 border border-[#d6e5dd] shadow-sm transition-all"
-                >
-                  <div className="flex items-center justify-between gap-3 mb-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-9 h-9 shrink-0 rounded-full bg-[#edf4f0] text-[#2d4234] font-serif font-bold text-sm flex items-center justify-center border border-[#cbdcd2]">
-                        {item.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div className="min-w-0">
-                        <h4 className="font-serif font-semibold text-base text-[#1c2e22] truncate">
-                          {item.name}
-                        </h4>
-                        <span className="text-[10px] text-stone-400 font-sans">
-                          {formatRelativeTime(item.created_at)}
+            <div className="mt-4 space-y-5">
+              {loading ? (
+                <p className="py-6 text-center font-sans text-sm text-sage-500">Memuat doa &amp; ucapan...</p>
+              ) : wishes.length === 0 ? (
+                <p className="py-6 text-center font-sans text-sm text-sage-500">
+                  Belum ada doa &amp; ucapan. Jadilah yang pertama memberikan doa restu untuk kedua mempelai!
+                </p>
+              ) : (
+                visibleWishes.map((item) => (
+                  <div key={item.id} className="flex gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-forest-900 font-display text-sm text-cream-50">
+                      {item.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h4 className="truncate font-sans text-sm font-semibold text-ink">{item.name}</h4>
+                        <span className="font-sans text-[10px] text-gold-500">
+                          • {item.status === 'hadir' ? 'Hadir' : 'Tidak Hadir'}
                         </span>
                       </div>
+                      <span className="font-sans text-[10px] text-sage-500">{formatRelativeTime(item.created_at)}</span>
+                      <p className="mt-1 whitespace-pre-line break-words font-sans text-sm leading-relaxed text-ink">
+                        {item.message}
+                      </p>
                     </div>
-
-                    <span
-                      className={`shrink-0 text-[10px] uppercase font-sans tracking-wider px-3 py-1 rounded-full font-medium ${
-                        item.status === 'hadir'
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                          : 'bg-stone-100 text-stone-600 border border-stone-200'
-                      }`}
-                    >
-                      {item.status === 'hadir' ? 'Hadir' : 'Berhalangan'}
-                    </span>
                   </div>
+                ))
+              )}
+            </div>
 
-                  <p className="text-stone-700 text-xs sm:text-sm leading-relaxed pl-12 font-sans whitespace-pre-line break-words">
-                    {item.message}
-                  </p>
-                </div>
-              ))
+            {!loading && totalPages > 1 && (
+              <div className="mt-6 flex items-center justify-center gap-4 font-sans text-sm text-ink">
+                <button
+                  type="button"
+                  onClick={() => setPage(currentPage - 1)}
+                  disabled={currentPage === 0}
+                  aria-label="Halaman sebelumnya"
+                  className="rounded-full p-1.5 hover:bg-cream-100 disabled:opacity-30"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <span>{currentPage + 1} / {totalPages}</span>
+                <button
+                  type="button"
+                  onClick={() => setPage(currentPage + 1)}
+                  disabled={currentPage >= totalPages - 1}
+                  aria-label="Halaman berikutnya"
+                  className="rounded-full p-1.5 hover:bg-cream-100 disabled:opacity-30"
+                >
+                  <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
             )}
           </div>
-        </div>
+        </Card>
       </div>
     </section>
   );

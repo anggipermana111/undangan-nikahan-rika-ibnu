@@ -3,13 +3,14 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 const insertResult = { data: null as unknown, error: null as unknown };
 const insertSpy = vi.fn();
+const listResult = { data: [] as unknown[], error: null as unknown };
 
 vi.mock('@/lib/supabase', () => {
   const channel = { on: () => channel, subscribe: () => channel };
   const client = {
     from: () => ({
       select: () => ({
-        order: () => ({ limit: () => Promise.resolve({ data: [], error: null }) }),
+        order: () => ({ limit: () => Promise.resolve(listResult) }),
       }),
       insert: (row: unknown) => {
         insertSpy(row);
@@ -30,11 +31,23 @@ vi.mock('@/lib/supabase', () => {
 
 import RsvpWishesSection from '../src/components/RsvpWishesSection';
 
+function makeWishes(n: number) {
+  return Array.from({ length: n }, (_, i) => ({
+    id: `w${i + 1}`,
+    name: `Tamu ${i + 1}`,
+    message: `Pesan ${i + 1}`,
+    status: 'hadir',
+    pax: 1,
+    created_at: new Date(Date.now() - i * 60_000).toISOString(),
+  }));
+}
+
 describe('RsvpWishesSection Component', () => {
   beforeEach(() => {
     insertSpy.mockClear();
     insertResult.data = null;
     insertResult.error = null;
+    listResult.data = [];
   });
 
   it('renders form inputs and pre-fills guest name', () => {
@@ -76,5 +89,49 @@ describe('RsvpWishesSection Component', () => {
       expect(screen.getByRole('alert')).toBeTruthy();
     });
     expect(screen.queryByText('Ucapan gagal', { selector: 'p' })).toBeNull();
+  });
+
+  it('paginates wishes 5 per page', async () => {
+    listResult.data = makeWishes(12);
+    render(<RsvpWishesSection />);
+    await screen.findByText('Pesan 1');
+    expect(screen.getByText('1 / 3')).toBeTruthy();
+    expect(screen.queryByText('Pesan 6')).toBeNull();
+    const prev = screen.getByRole('button', { name: /halaman sebelumnya/i }) as HTMLButtonElement;
+    const next = screen.getByRole('button', { name: /halaman berikutnya/i }) as HTMLButtonElement;
+    expect(prev.disabled).toBe(true);
+    fireEvent.click(next);
+    expect(screen.getByText('Pesan 6')).toBeTruthy();
+    expect(screen.queryByText('Pesan 1')).toBeNull();
+    expect(screen.getByText('2 / 3')).toBeTruthy();
+    fireEvent.click(next);
+    expect(screen.getByText('Pesan 11')).toBeTruthy();
+    expect(next.disabled).toBe(true);
+    fireEvent.click(prev);
+    expect(screen.getByText('2 / 3')).toBeTruthy();
+  });
+
+  it('hides the pager when there is only one page', async () => {
+    listResult.data = makeWishes(3);
+    render(<RsvpWishesSection />);
+    await screen.findByText('Pesan 1');
+    expect(screen.queryByRole('button', { name: /halaman berikutnya/i })).toBeNull();
+  });
+
+  it('returns to page 1 after submitting from a later page', async () => {
+    listResult.data = makeWishes(12);
+    insertResult.data = {
+      id: 'new', name: 'Budi', message: 'Ucapan baru', status: 'hadir', pax: 1,
+      created_at: new Date().toISOString(),
+    };
+    render(<RsvpWishesSection guestName="Budi" />);
+    await screen.findByText('Pesan 1');
+    fireEvent.click(screen.getByRole('button', { name: /halaman berikutnya/i }));
+    fireEvent.click(screen.getByRole('button', { name: /halaman berikutnya/i }));
+    expect(screen.getByText('3 / 3')).toBeTruthy();
+    fireEvent.change(screen.getByLabelText(/doa/i), { target: { value: 'Ucapan baru' } });
+    fireEvent.click(screen.getByRole('button', { name: /kirim/i }));
+    await screen.findByText('Ucapan baru', { selector: 'p' });
+    expect(screen.getByText('1 / 3')).toBeTruthy();
   });
 });
