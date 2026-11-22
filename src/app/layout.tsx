@@ -1,25 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans, Alex_Brush } from "next/font/google";
+import { Cinzel, Cormorant_Garamond, Pinyon_Script, Quicksand } from "next/font/google";
 import "./globals.css";
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cinzel",
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   variable: "--font-cormorant",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const pinyon = Pinyon_Script({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-dm-sans",
+  weight: ["400"],
+  variable: "--font-pinyon",
   display: "swap",
 });
 
-const alexBrush = Alex_Brush({
+const quicksand = Quicksand({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-alex-brush",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-quicksand",
   display: "swap",
 });
 
@@ -50,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2d4234",
+  themeColor: "#1F3A34",
 };
 
 export default function RootLayout({
@@ -59,8 +67,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`scroll-smooth ${cormorant.variable} ${dmSans.variable} ${alexBrush.variable}`}>
-      <body className="antialiased selection:bg-emerald-100 selection:text-emerald-900 font-sans text-stone-700 bg-[#f7f9f8]">
+    <html
+      lang="id"
+      className={`scroll-smooth ${cinzel.variable} ${cormorant.variable} ${pinyon.variable} ${quicksand.variable}`}
+    >
+      <body className="antialiased font-sans text-ink bg-forest-900 selection:bg-gold-500/30">
         {children}
       </body>
     </html>
