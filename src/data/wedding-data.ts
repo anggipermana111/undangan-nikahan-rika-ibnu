@@ -21,7 +21,7 @@ export const weddingData: WeddingData = {
   dateShort: '03 . 12 . 2026',
   dateLong: '3 Desember 2026',
   monogram: 'R I',
-  coverPhoto: '/images/gallery/01.jpg',
+  coverPhoto: '/images/couple/cover.jpg',
   heroPhoto: '/images/gallery/10.jpg',
   closingPhoto: '/images/gallery/09.jpg',
   quote: {
@@ -39,7 +39,7 @@ export const weddingData: WeddingData = {
       mapsUrl: 'https://maps.google.com/?q=Islamic+Center+Pangandaran',
       calendarTitle: 'Akad Nikah Ibnu & Rika',
       calendarDescription: 'Akad Nikah Ibnu Rizal Aqila & Rika Nadiyanti di Gedung Islamic Center Pangandaran',
-      photo: '/images/gallery/02.jpg',
+      photo: '/images/gallery/03.jpg',
     },
     resepsi: {
       title: 'Resepsi Pernikahan',
