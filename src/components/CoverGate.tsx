@@ -16,7 +16,10 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
   const [first, second] = weddingData.monogram.split(' ');
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center bg-forest-900">
+    <div
+      className="fixed inset-0 z-50 flex justify-center bg-forest-900 bg-cover bg-center"
+      style={{ backgroundImage: "url('/themes/forest/outer-bg.webp')" }}
+    >
       <div className="relative flex h-full w-full max-w-[440px] flex-col items-center overflow-hidden bg-cream-50 text-center">
         <WatercolorHeader className="h-[58%]" />
 

@@ -20,8 +20,10 @@ export default function HeroSection({ data }: HeroSectionProps) {
           alt={`${bride.nickName} & ${groom.nickName}`}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest-900/75 via-forest-900/35 to-cream-50" />
-        <WatercolorHeader className="opacity-80" />
+        {/* Even dark tint for name contrast, then fade into the cream content below */}
+        <div className="absolute inset-0 bg-forest-900/55" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-cream-50" />
+        <WatercolorHeader className="opacity-70" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
           <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.35em] text-cream-50">
             The Wedding of
