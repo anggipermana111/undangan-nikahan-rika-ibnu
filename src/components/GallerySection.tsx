@@ -15,6 +15,8 @@ const SWIPE_MIN_PX = 50;
 export default function GallerySection({ images }: GallerySectionProps) {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
   const count = images?.length ?? 0;
 
   const close = useCallback(() => setSelectedIdx(null), []);
@@ -37,6 +39,19 @@ export default function GallerySection({ images }: GallerySectionProps) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [selectedIdx, close, prev, next]);
+
+  const isOpen = selectedIdx !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    // Lock page scroll behind the overlay and move focus into it; restore both on close
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeBtnRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      openerRef.current?.focus();
+    };
+  }, [isOpen]);
 
   if (count === 0) return null;
 
@@ -68,7 +83,10 @@ export default function GallerySection({ images }: GallerySectionProps) {
           <FadeUp key={photo.id} threshold={0.05} delay={`fade-up-delay-${(index % 2) + 1}`}>
             <button
               type="button"
-              onClick={() => setSelectedIdx(index)}
+              onClick={(e) => {
+                openerRef.current = e.currentTarget;
+                setSelectedIdx(index);
+              }}
               aria-label={`Buka foto ${photo.alt}`}
               className="block aspect-[3/4] w-full overflow-hidden rounded-2xl bg-cream-100 shadow-md"
             >
@@ -95,15 +113,16 @@ export default function GallerySection({ images }: GallerySectionProps) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 animate-fade-in"
         >
           <button
+            ref={closeBtnRef}
             onClick={stop(close)}
-            aria-label="Close Lightbox"
+            aria-label="Tutup foto"
             className="absolute right-4 top-4 rounded-full bg-white/20 p-2.5 text-white hover:bg-white/30"
           >
             <X className="h-6 w-6" />
           </button>
           <button
             onClick={stop(prev)}
-            aria-label="Previous Image"
+            aria-label="Foto sebelumnya"
             className="absolute left-3 rounded-full bg-white/20 p-3 text-white hover:bg-white/30"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -116,7 +135,7 @@ export default function GallerySection({ images }: GallerySectionProps) {
           />
           <button
             onClick={stop(next)}
-            aria-label="Next Image"
+            aria-label="Foto berikutnya"
             className="absolute right-3 rounded-full bg-white/20 p-3 text-white hover:bg-white/30"
           >
             <ChevronRight className="h-6 w-6" />

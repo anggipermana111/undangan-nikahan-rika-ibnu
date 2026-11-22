@@ -23,7 +23,7 @@ describe('GallerySection Component', () => {
   it('opens lightbox preview when an image is clicked', () => {
     const dialog = openFirst();
     expect(within(dialog).getByAltText('Momen 1')).toBeTruthy();
-    expect(screen.getByLabelText(/close lightbox/i)).toBeTruthy();
+    expect(screen.getByRole('button', { name: /tutup foto/i })).toBeTruthy();
   });
 
   it('closes on Escape and removes the key listener', () => {
@@ -59,5 +59,19 @@ describe('GallerySection Component', () => {
     fireEvent.touchStart(dialog, { touches: [{ clientX: 200 }] });
     fireEvent.touchEnd(dialog, { changedTouches: [{ clientX: 180 }] });
     expect(within(dialog).getByAltText('Momen 1')).toBeTruthy();
+  });
+
+  it('moves focus into the lightbox, locks body scroll, and restores both on close', () => {
+    render(<GallerySection images={mockImages} />);
+    const opener = screen.getByRole('button', { name: /buka foto momen 2/i });
+    opener.focus();
+    fireEvent.click(opener);
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: /tutup foto/i }));
+    expect(document.body.style.overflow).toBe('hidden');
+    expect(screen.getByRole('button', { name: /foto sebelumnya/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /foto berikutnya/i })).toBeTruthy();
+    fireEvent.keyDown(window, { key: 'Escape' });
+    expect(document.body.style.overflow).toBe('');
+    expect(document.activeElement).toBe(opener);
   });
 });

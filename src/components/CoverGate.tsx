@@ -20,12 +20,16 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
       className="fixed inset-0 z-50 flex justify-center bg-forest-900 bg-cover bg-center"
       style={{ backgroundImage: "url('/themes/forest/outer-bg.webp')" }}
     >
-      <div className="relative flex h-full w-full max-w-[440px] flex-col items-center overflow-hidden bg-cream-50 text-center">
+      <div
+        data-testid="cover-column"
+        className="relative flex h-full w-full max-w-[440px] flex-col items-center overflow-y-auto overflow-x-hidden bg-cream-50 pb-32 text-center"
+      >
         <WatercolorHeader className="h-[58%]" />
 
-        <div className="relative z-10 mt-[12vh] flex flex-col items-center px-8">
+        <div className="relative z-10 mt-[8svh] flex flex-col items-center px-8">
           {/* Capsule photo */}
-          <div className="relative h-[300px] w-[210px] overflow-hidden rounded-full border-4 border-cream-50 bg-cream-100 shadow-2xl">
+          {/* Capsule shrinks on short viewports (in-app browsers) so the button stays on screen */}
+          <div className="relative aspect-[7/10] h-[min(300px,42svh)] overflow-hidden rounded-full border-4 border-cream-50 bg-cream-100 shadow-2xl">
             <img
               src={weddingData.coverPhoto}
               alt={`${weddingData.bride.nickName} & ${weddingData.groom.nickName}`}

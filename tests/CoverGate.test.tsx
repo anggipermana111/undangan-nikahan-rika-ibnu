@@ -36,4 +36,12 @@ describe('CoverGate Component', () => {
     expect(el.className).toMatch(/break-words/);
     expect(screen.getByRole('button', { name: /buka undangan/i })).toBeTruthy();
   });
+
+  it('keeps the open button reachable on short in-app browser viewports', () => {
+    render(<CoverGate guestName="Anggi" onOpen={() => {}} />);
+    const column = screen.getByTestId('cover-column');
+    expect(column.className).toMatch(/overflow-y-auto/);
+    const capsule = screen.getByAltText(/rika & ibnu/i).parentElement as HTMLElement;
+    expect(capsule.className).toMatch(/svh/);
+  });
 });

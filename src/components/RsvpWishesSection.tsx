@@ -89,6 +89,8 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
         { event: 'INSERT', schema: 'public', table: 'wishes' },
         (payload) => {
           setWishes((prev) => prependUnique(prev, payload.new as WishRecord));
+          // New wishes land at index 0; bring the reader back to where they appear
+          setPage(0);
         }
       )
       .subscribe();
