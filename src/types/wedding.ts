@@ -19,6 +19,7 @@ export interface WeddingEvent {
   mapsUrl: string;
   calendarTitle: string;
   calendarDescription: string;
+  photo: string;
 }
 
 export interface StoryMilestone {
@@ -57,6 +58,11 @@ export interface WeddingData {
   dateShort: string;
   /** Long date without weekday, e.g. "3 Desember 2026" */
   dateLong: string;
+  /** Monogram letters shown on the cover, e.g. "R I" */
+  monogram: string;
+  coverPhoto: string;
+  heroPhoto: string;
+  closingPhoto: string;
   quote: {
     text: string;
     source: string;
