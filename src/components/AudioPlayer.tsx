@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Disc } from 'lucide-react';
+import { VolumeX, Disc } from 'lucide-react';
 
 interface AudioPlayerProps {
   isPlaying: boolean;
@@ -33,7 +33,7 @@ export default function AudioPlayer({ isPlaying, onToggle, audioSrc }: AudioPlay
         ref={audioRef}
         src={audioSrc}
         loop
-        preload="auto"
+        preload="none"
       />
       <button
         onClick={onToggle}

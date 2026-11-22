@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { weddingData } from '@/data/wedding-data';
 
@@ -19,7 +19,6 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
   const displayGuestName = guestName && guestName.trim() !== '' ? guestName.trim() : 'Tamu Undangan';
   const [birdData, setBirdData] = useState<object | null>(null);
   const [scrollY, setScrollY] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Load bird lottie JSON
   useEffect(() => {
@@ -38,7 +37,6 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
 
   return (
     <div
-      ref={containerRef}
       className="fixed inset-0 z-50 flex flex-col items-center justify-between text-center select-none overflow-hidden"
     >
       {/* ── LAYER 1: Single full cover background ── */}
@@ -100,7 +98,7 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
           {weddingData.bride.nickName} & {weddingData.groom.nickName}
         </h1>
         <p className="text-[11px] uppercase tracking-[0.35em] text-white font-semibold font-sans drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] mb-5">
-          03 . 12 . 2026
+          {weddingData.dateShort}
         </p>
 
         {/* Guest Name Box (glassmorphism) */}
@@ -131,7 +129,7 @@ export default function CoverGate({ guestName, onOpen }: CoverGateProps) {
 
       {/* ── HASHTAG FOOTER ── */}
       <div className="relative pb-5 z-20 text-[11px] text-white font-sans tracking-[0.3em] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-        <p>{weddingData.hashtag ?? '#RikaIbnu2026'}</p>
+        <p>{weddingData.hashtag}</p>
       </div>
     </div>
   );

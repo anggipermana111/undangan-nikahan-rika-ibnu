@@ -38,12 +38,13 @@ function WeddingContent() {
   };
 
   return (
-    <div
-      className="relative min-h-screen bg-cover bg-center bg-fixed selection:bg-emerald-100 selection:text-emerald-900"
-      style={{
-        backgroundImage: `url('/themes/dreamy/main-bg.webp')`,
-      }}
-    >
+    <div className="relative min-h-screen selection:bg-emerald-100 selection:text-emerald-900">
+      {/* Fixed background layer (background-attachment: fixed is broken on iOS Safari) */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 -z-10 bg-cover bg-center"
+        style={{ backgroundImage: `url('/themes/dreamy/main-bg.webp')` }}
+      />
       {/* Cover Gate Overlay */}
       {!isOpen && (
         <CoverGate guestName={guestName} onOpen={handleOpen} />

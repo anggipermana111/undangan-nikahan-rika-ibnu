@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans, Alex_Brush } from "next/font/google";
 import "./globals.css";
 
@@ -23,9 +23,34 @@ const alexBrush = Alex_Brush({
   display: "swap",
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://undangan-nikahan-rika-ibnu.vercel.app";
+const TITLE = "The Wedding of Rika & Ibnu";
+const DESCRIPTION =
+  "Kamis, 3 Desember 2026 · Gedung Islamic Center Pangandaran. Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.";
+
 export const metadata: Metadata = {
-  title: "The Wedding of Ibnu & Rika",
-  description: "Undangan Pernikahan Digital Ibnu Rizal Aqila & Rika Nadiyanti",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    siteName: TITLE,
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Rika & Ibnu" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og-image.jpg"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2d4234",
 };
 
 export default function RootLayout({

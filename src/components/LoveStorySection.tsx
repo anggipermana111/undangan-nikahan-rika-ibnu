@@ -3,19 +3,10 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { StoryMilestone } from '@/types/wedding';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import FadeUp from './FadeUp';
 
 interface LoveStorySectionProps {
   data: StoryMilestone[];
-}
-
-function FadeUpItem({ children, delay = '' }: { children: React.ReactNode; delay?: string }) {
-  const { ref, isVisible } = useScrollAnimation();
-  return (
-    <div ref={ref} className={`fade-up ${isVisible ? 'visible' : ''} ${delay}`}>
-      {children}
-    </div>
-  );
 }
 
 export default function LoveStorySection({ data }: LoveStorySectionProps) {
@@ -25,7 +16,7 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
     <section id="story" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       <div className="relative max-w-2xl mx-auto z-10">
         {/* Section Header */}
-        <FadeUpItem>
+        <FadeUp>
           <div className="flex justify-center mb-5">
             <div className="w-10 h-10 rounded-full bg-[#edf4f0] border-2 border-[#3b5945] flex items-center justify-center shadow-sm">
               <Heart className="w-4 h-4 text-[#2d4234] fill-[#84a991]" />
@@ -40,7 +31,7 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
           <p className="font-script text-3xl sm:text-4xl text-[#3b5945] mb-14">
             Called Us
           </p>
-        </FadeUpItem>
+        </FadeUp>
 
         {/* Timeline */}
         <div className="relative text-left">
@@ -49,7 +40,7 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
 
           <div className="space-y-10">
             {data.map((item, index) => (
-              <FadeUpItem key={index} delay={`fade-up-delay-${index + 1}`}>
+              <FadeUp key={index} delay={`fade-up-delay-${index + 1}`}>
                 <div className="relative flex gap-6">
                   {/* Timeline dot */}
                   <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full bg-[#edf4f0] border-2 border-[#3b5945] flex items-center justify-center shadow-md">
@@ -69,7 +60,7 @@ export default function LoveStorySection({ data }: LoveStorySectionProps) {
                     </p>
                   </div>
                 </div>
-              </FadeUpItem>
+              </FadeUp>
             ))}
           </div>
         </div>

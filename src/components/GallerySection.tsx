@@ -4,18 +4,10 @@ import React, { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GalleryPhoto } from '@/types/wedding';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import FadeUp from './FadeUp';
 
 interface GallerySectionProps {
   images: GalleryPhoto[];
-}
-
-function FadeUpPhoto({ children, delay = '' }: { children: React.ReactNode; delay?: string }) {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.05 });
-  return (
-    <div ref={ref} className={`fade-up ${isVisible ? 'visible' : ''} ${delay}`}>
-      {children}
-    </div>
-  );
 }
 
 export default function GallerySection({ images }: GallerySectionProps) {
@@ -39,17 +31,6 @@ export default function GallerySection({ images }: GallerySectionProps) {
     setSelectedIdx((selectedIdx + 1) % images.length);
   };
 
-  // Assign heights: tall / medium alternating pattern for masonry feel
-  const heightClasses = [
-    'aspect-[2/3]', // tall
-    'aspect-[3/4]', // medium-tall
-    'aspect-[2/3]', // tall
-    'aspect-[3/4]', // medium-tall
-    'aspect-[2/3]',
-    'aspect-[3/4]',
-    'aspect-[2/3]',
-  ];
-
   return (
     <section id="gallery" className="relative py-24 px-4 text-center overflow-hidden bg-transparent">
       <div className="relative max-w-5xl mx-auto z-10">
@@ -69,7 +50,8 @@ export default function GallerySection({ images }: GallerySectionProps) {
         {/* Curated Grid Arch Photo Gallery */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {images.map((photo, index) => (
-            <FadeUpPhoto
+            <FadeUp
+              threshold={0.05}
               key={photo.id}
               delay={`fade-up-delay-${(index % 3) + 1}`}
             >
@@ -82,6 +64,7 @@ export default function GallerySection({ images }: GallerySectionProps) {
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-108"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1e3325]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
@@ -92,7 +75,7 @@ export default function GallerySection({ images }: GallerySectionProps) {
                   )}
                 </div>
               </div>
-            </FadeUpPhoto>
+            </FadeUp>
           ))}
         </div>
       </div>

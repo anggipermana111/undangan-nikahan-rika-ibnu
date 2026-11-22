@@ -4,20 +4,11 @@ import React from 'react';
 import { Copy, Check, Gift, MapPin, Phone } from 'lucide-react';
 import { BankAccount, GiftAddress } from '@/types/wedding';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import FadeUp from './FadeUp';
 
 interface GiftSectionProps {
   bankAccounts: BankAccount[];
   giftAddress: GiftAddress;
-}
-
-function FadeUpDiv({ children, delay = '', className = '' }: { children: React.ReactNode; delay?: string; className?: string }) {
-  const { ref, isVisible } = useScrollAnimation();
-  return (
-    <div ref={ref} className={`fade-up ${isVisible ? 'visible' : ''} ${delay} ${className}`}>
-      {children}
-    </div>
-  );
 }
 
 export default function GiftSection({ bankAccounts, giftAddress }: GiftSectionProps) {
@@ -35,7 +26,7 @@ export default function GiftSection({ bankAccounts, giftAddress }: GiftSectionPr
 
       <div className="relative max-w-2xl mx-auto z-10">
         {/* Header */}
-        <FadeUpDiv>
+        <FadeUp>
           <div className="flex justify-center mb-5">
             <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center">
               <Gift className="w-5 h-5 text-emerald-200" />
@@ -50,14 +41,14 @@ export default function GiftSection({ bankAccounts, giftAddress }: GiftSectionPr
           <p className="text-sm text-stone-200 mb-14 leading-relaxed font-sans max-w-sm mx-auto">
             Doa restu Anda merupakan karunia terindah. Namun jika berkenan memberikan tanda kasih, dapat melalui:
           </p>
-        </FadeUpDiv>
+        </FadeUp>
 
         {/* Bank Account Cards */}
         <div className="space-y-5 mb-10">
           {bankAccounts.map((account, index) => {
             const isCopied = copiedText === account.accountNumber;
             return (
-              <FadeUpDiv key={index} delay={`fade-up-delay-${index + 1}`}>
+              <FadeUp key={index} delay={`fade-up-delay-${index + 1}`}>
                 <div className="bg-white/15 backdrop-blur-md rounded-3xl p-7 border border-white/30 shadow-xl text-left relative overflow-hidden">
                   {/* Decorative circles */}
                   <div className="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-white/5 pointer-events-none" />
@@ -105,14 +96,14 @@ export default function GiftSection({ bankAccounts, giftAddress }: GiftSectionPr
                     )}
                   </button>
                 </div>
-              </FadeUpDiv>
+              </FadeUp>
             );
           })}
         </div>
 
         {/* Physical Gift Address */}
         {giftAddress && (
-          <FadeUpDiv delay="fade-up-delay-3">
+          <FadeUp delay="fade-up-delay-3">
             <div className="bg-white/15 backdrop-blur-md border border-white/30 rounded-3xl p-7 text-left shadow-xl">
               <div className="flex items-center gap-3.5 mb-5">
                 <div className="p-3 rounded-2xl bg-white/20 border border-white/20">
@@ -165,7 +156,7 @@ export default function GiftSection({ bankAccounts, giftAddress }: GiftSectionPr
                 )}
               </button>
             </div>
-          </FadeUpDiv>
+          </FadeUp>
         )}
 
         {/* Copy toast */}

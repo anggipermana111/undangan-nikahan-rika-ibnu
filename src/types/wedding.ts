@@ -4,7 +4,7 @@ export interface CouplePerson {
   parents: string;
   fatherName?: string;
   motherName?: string;
-  orderInFamily: string; // e.g. "Putra Pertama dari"
+  orderInFamily: string; // e.g. "Putra Pertama dari 2 bersaudara"
   instagram?: string;
   photo: string;
 }
@@ -53,6 +53,10 @@ export interface WeddingData {
   groom: CouplePerson;
   bride: CouplePerson;
   coverGreeting: string;
+  /** Short date for the cover, e.g. "03 . 12 . 2026" */
+  dateShort: string;
+  /** Long date without weekday, e.g. "3 Desember 2026" */
+  dateLong: string;
   quote: {
     text: string;
     source: string;
@@ -66,6 +70,5 @@ export interface WeddingData {
   bankAccounts: BankAccount[];
   giftAddress: GiftAddress;
   audioSrc: string;
-  liveStreamingUrl?: string;
   hashtag?: string;
 }
