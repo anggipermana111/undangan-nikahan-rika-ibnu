@@ -8,10 +8,13 @@ describe('Wedding Invitation Full Page Integration', () => {
     expect(screen.getByRole('button', { name: /buka undangan/i })).toBeTruthy();
   });
 
-  it('unveils invitation content when gate is opened', () => {
-    render(<WeddingPage />);
-    const openBtn = screen.getByRole('button', { name: /buka undangan/i });
-    fireEvent.click(openBtn);
-    expect(screen.getByText(/Calon Pengantin/i)).toBeTruthy();
+  it('shows every section in order after opening', () => {
+    const { container } = render(<WeddingPage />);
+    fireEvent.click(screen.getByRole('button', { name: /buka undangan/i }));
+    expect(screen.queryByRole('button', { name: /buka undangan/i })).toBeNull();
+    const ids = Array.from(container.querySelectorAll('main section[id]')).map((s) => s.id);
+    expect(ids).toEqual(['hero', 'quote', 'couple', 'event', 'story', 'gallery', 'gift', 'rsvp', 'closing']);
+    expect(screen.getByRole('heading', { name: /terima kasih/i })).toBeTruthy();
+    expect(screen.queryByRole('navigation')).toBeNull();
   });
 });

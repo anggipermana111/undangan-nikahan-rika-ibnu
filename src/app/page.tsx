@@ -5,14 +5,15 @@ import { useSearchParams } from 'next/navigation';
 import { weddingData } from '@/data/wedding-data';
 import CoverGate from '@/components/CoverGate';
 import AudioPlayer from '@/components/AudioPlayer';
+import HeroSection from '@/components/HeroSection';
+import QuoteSection from '@/components/QuoteSection';
 import CoupleSection from '@/components/CoupleSection';
 import EventSection from '@/components/EventSection';
 import LoveStorySection from '@/components/LoveStorySection';
 import GallerySection from '@/components/GallerySection';
 import GiftSection from '@/components/GiftSection';
 import RsvpWishesSection from '@/components/RsvpWishesSection';
-import FloatingNavbar from '@/components/FloatingNavbar';
-import { Heart } from 'lucide-react';
+import ClosingSection from '@/components/ClosingSection';
 
 function WeddingContent() {
   const searchParams = useSearchParams();
@@ -23,9 +24,7 @@ function WeddingContent() {
   useEffect(() => {
     if (!searchParams) return;
     const to = searchParams.get('to');
-    if (to && to.trim() !== '') {
-      setGuestName(to.trim());
-    }
+    if (to && to.trim() !== '') setGuestName(to.trim());
   }, [searchParams]);
 
   const handleOpen = () => {
@@ -33,101 +32,48 @@ function WeddingContent() {
     setIsPlaying(true);
   };
 
-  const handleToggleAudio = () => {
-    setIsPlaying((prev) => !prev);
-  };
-
   return (
-    <div className="relative min-h-screen selection:bg-emerald-100 selection:text-emerald-900">
-      {/* Fixed background layer (background-attachment: fixed is broken on iOS Safari) */}
+    <div className="relative min-h-screen">
+      {/* Desktop backdrop outside the phone-width column */}
       <div
         aria-hidden="true"
-        className="fixed inset-0 -z-10 bg-cover bg-center"
-        style={{ backgroundImage: `url('/themes/dreamy/main-bg.webp')` }}
-      />
-      {/* Cover Gate Overlay */}
-      {!isOpen && (
-        <CoverGate guestName={guestName} onOpen={handleOpen} />
-      )}
-
-      {/* Floating Audio Controller */}
-      <AudioPlayer
-        isPlaying={isPlaying}
-        onToggle={handleToggleAudio}
-        audioSrc={weddingData.audioSrc}
+        className="fixed inset-0 bg-forest-900 bg-cover bg-center"
+        style={{ backgroundImage: "url('/themes/forest/outer-bg.webp')" }}
       />
 
-      {/* Floating Bottom Dock (only visible when opened) */}
-      {isOpen && <FloatingNavbar />}
+      {!isOpen && <CoverGate guestName={guestName} onOpen={handleOpen} />}
 
-      {/* Main Wedding Content */}
-      <main className={`transition-opacity duration-1000 ${isOpen ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-
-        {/* 1. Couple Section — first section seen after opening */}
-        <CoupleSection data={weddingData} />
-
-        {/* 2. Event & Countdown */}
-        <EventSection events={weddingData.events} />
-
-        {/* 3. Love Story — after event, before gallery */}
-        <LoveStorySection data={weddingData.loveStory} />
-
-        {/* 4. Gallery */}
-        <GallerySection images={weddingData.gallery} />
-
-        {/* 5. Gift & Digital Envelope */}
-        <GiftSection bankAccounts={weddingData.bankAccounts} giftAddress={weddingData.giftAddress} />
-
-        {/* 6. RSVP & Wishes */}
-        <RsvpWishesSection guestName={guestName} />
-
-        {/* 7. Footer */}
-        <footer className="relative py-20 px-4 bg-[#1e2f24] text-white text-center pb-28 overflow-hidden">
-          <div className="relative max-w-md mx-auto space-y-6 z-10">
-            {/* Heart ornament */}
-            <div className="flex justify-center">
-              <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-emerald-300 fill-emerald-400/40" />
-              </div>
-            </div>
-
-            <p className="font-script text-4xl sm:text-5xl text-white leading-tight">
-              {weddingData.bride.nickName} & {weddingData.groom.nickName}
-            </p>
-
-            <div className="flex items-center justify-center gap-3">
-              <div className="h-px flex-1 bg-white/20 max-w-16" />
-              <span className="text-emerald-300 text-sm">✦</span>
-              <div className="h-px flex-1 bg-white/20 max-w-16" />
-            </div>
-
-            <p className="text-sm text-stone-300 leading-relaxed font-sans max-w-xs mx-auto">
-              Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami.
-            </p>
-
-            <p className="text-[11px] uppercase tracking-[0.3em] text-emerald-200 font-sans font-semibold">
-              Kami yang berbahagia
-            </p>
-
-            <p className="text-[11px] uppercase tracking-[0.4em] text-[#2d4234] font-sans font-bold">
-              {weddingData.hashtag}
-            </p>
-
-            <div className="pt-6 border-t border-white/10">
-              <p className="text-[10px] text-stone-500 tracking-wider font-sans">
-                Beserta Seluruh Keluarga Besar
-              </p>
-            </div>
-          </div>
-        </footer>
-      </main>
+      <div className="relative mx-auto min-h-screen w-full max-w-[440px] bg-cream-50 shadow-2xl">
+        <AudioPlayer
+          isPlaying={isPlaying}
+          onToggle={() => setIsPlaying((prev) => !prev)}
+          audioSrc={weddingData.audioSrc}
+        />
+        <main className={isOpen ? 'animate-fade-in' : 'h-0 overflow-hidden opacity-0'}>
+          <HeroSection data={weddingData} />
+          <QuoteSection quote={weddingData.quote} />
+          <CoupleSection data={weddingData} />
+          <EventSection events={weddingData.events} />
+          <LoveStorySection data={weddingData.loveStory} />
+          <GallerySection images={weddingData.gallery} />
+          <GiftSection bankAccounts={weddingData.bankAccounts} giftAddress={weddingData.giftAddress} />
+          <RsvpWishesSection guestName={guestName} />
+          <ClosingSection data={weddingData} />
+        </main>
+      </div>
     </div>
   );
 }
 
 export default function WeddingPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#dbeef7] flex items-center justify-center font-serif text-[#1e3325] text-xl">Memuat Undangan...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-forest-900 font-display text-lg text-cream-50">
+          Memuat Undangan...
+        </div>
+      }
+    >
       <WeddingContent />
     </Suspense>
   );
