@@ -17,4 +17,12 @@ describe('Wedding Invitation Full Page Integration', () => {
     expect(screen.getByRole('heading', { name: /terima kasih/i })).toBeTruthy();
     expect(screen.queryByRole('navigation')).toBeNull();
   });
+
+  it('keeps the hidden invitation out of keyboard and screen reader reach until opened', () => {
+    const { container } = render(<WeddingPage />);
+    const main = container.querySelector('main') as HTMLElement;
+    expect(main.hasAttribute('inert')).toBe(true);
+    fireEvent.click(screen.getByRole('button', { name: /buka undangan/i }));
+    expect(main.hasAttribute('inert')).toBe(false);
+  });
 });

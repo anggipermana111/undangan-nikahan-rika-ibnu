@@ -32,4 +32,10 @@ describe('Theme tokens', () => {
     expect(block).toMatch(/\.animate-sparkle/);
     expect(block).toMatch(/\.fade-up/);
   });
+
+  it('keeps raw hex colors out of global CSS and layout', () => {
+    const layout = fs.readFileSync(path.resolve(__dirname, '../src/app/layout.tsx'), 'utf-8');
+    expect(css).not.toMatch(/#[0-9a-fA-F]{6}/);
+    expect(layout).not.toMatch(/#[0-9a-fA-F]{6}/);
+  });
 });

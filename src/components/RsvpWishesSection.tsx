@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2, Users, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import Card from './ui/Card';
 import Sparkles from './ui/Sparkles';
+import { weddingData } from '@/data/wedding-data';
 import confetti from 'canvas-confetti';
 import {
   supabase,
@@ -197,7 +198,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
                 maxLength={WISH_MESSAGE_MAX}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Berikan ucapan & doa untuk Rika & Ibnu"
+                placeholder={`Berikan ucapan & doa untuk ${weddingData.bride.nickName} & ${weddingData.groom.nickName}`}
                 className={`${field} resize-none`}
               />
               <p className="mt-1 text-right font-sans text-[10px] text-sage-500">
@@ -288,8 +289,8 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
                       {item.name.charAt(0).toUpperCase()}
                     </div>
                     <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h4 className="truncate font-sans text-sm font-semibold text-ink">{item.name}</h4>
+                      <div className="flex min-w-0 flex-wrap items-center gap-2">
+                        <h4 className="max-w-full truncate font-sans text-sm font-semibold text-ink">{item.name}</h4>
                         <span className="font-sans text-[10px] text-gold-500">
                           • {item.status === 'hadir' ? 'Hadir' : 'Tidak Hadir'}
                         </span>
@@ -311,7 +312,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
                   onClick={() => setPage(currentPage - 1)}
                   disabled={currentPage === 0}
                   aria-label="Halaman sebelumnya"
-                  className="rounded-full p-1.5 hover:bg-cream-100 disabled:opacity-30"
+                  className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-cream-100 disabled:opacity-30"
                 >
                   <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                 </button>
@@ -321,7 +322,7 @@ export default function RsvpWishesSection({ guestName }: RsvpWishesSectionProps)
                   onClick={() => setPage(currentPage + 1)}
                   disabled={currentPage >= totalPages - 1}
                   aria-label="Halaman berikutnya"
-                  className="rounded-full p-1.5 hover:bg-cream-100 disabled:opacity-30"
+                  className="flex h-11 w-11 items-center justify-center rounded-full hover:bg-cream-100 disabled:opacity-30"
                 >
                   <ChevronRight className="h-4 w-4" aria-hidden="true" />
                 </button>

@@ -37,6 +37,7 @@ vi.mock('@/lib/supabase', () => {
 });
 
 import RsvpWishesSection from '../src/components/RsvpWishesSection';
+import { weddingData } from '../src/data/wedding-data';
 
 function makeWishes(n: number) {
   return Array.from({ length: n }, (_, i) => ({
@@ -156,5 +157,33 @@ describe('RsvpWishesSection Component', () => {
     });
     expect(screen.getByText('Ucapan realtime')).toBeTruthy();
     expect(screen.getByText('1 / 3')).toBeTruthy();
+  });
+
+  it('lets long wisher names truncate inside the wrapping row', async () => {
+    listResult.data = makeWishes(1);
+    render(<RsvpWishesSection />);
+    const name = await screen.findByRole('heading', { level: 4, name: 'Tamu 1' });
+    expect(name.className).toMatch(/truncate/);
+    expect(name.className).toMatch(/max-w-full/);
+    expect((name.parentElement as HTMLElement).className).toMatch(/min-w-0/);
+  });
+
+  it('gives pager arrows a 44px touch target', async () => {
+    listResult.data = makeWishes(12);
+    render(<RsvpWishesSection />);
+    await screen.findByText('Pesan 1');
+    for (const label of [/halaman sebelumnya/i, /halaman berikutnya/i]) {
+      const btn = screen.getByRole('button', { name: label });
+      expect(btn.className).toMatch(/h-11/);
+      expect(btn.className).toMatch(/w-11/);
+    }
+  });
+
+  it('builds the message placeholder from the couple nicknames', () => {
+    render(<RsvpWishesSection />);
+    const textarea = screen.getByLabelText(/doa/i) as HTMLTextAreaElement;
+    expect(textarea.placeholder).toBe(
+      `Berikan ucapan & doa untuk ${weddingData.bride.nickName} & ${weddingData.groom.nickName}`
+    );
   });
 });

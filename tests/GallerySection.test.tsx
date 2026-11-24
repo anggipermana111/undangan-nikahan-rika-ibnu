@@ -74,4 +74,11 @@ describe('GallerySection Component', () => {
     expect(document.body.style.overflow).toBe('');
     expect(document.activeElement).toBe(opener);
   });
+
+  it('only zooms thumbnails on hover when motion is allowed', () => {
+    render(<GallerySection images={mockImages} />);
+    const img = screen.getAllByRole('img')[0];
+    expect(img.className).toMatch(/motion-safe:hover:scale-105/);
+    expect(img.className).not.toMatch(/(^|\s)hover:scale-105/);
+  });
 });

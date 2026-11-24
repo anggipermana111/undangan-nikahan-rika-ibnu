@@ -49,7 +49,8 @@ function WeddingContent() {
           onToggle={() => setIsPlaying((prev) => !prev)}
           audioSrc={weddingData.audioSrc}
         />
-        <main className={isOpen ? 'animate-fade-in' : 'h-0 overflow-hidden opacity-0'}>
+        {/* inert keeps the hidden invitation out of Tab order and screen readers until opened */}
+        <main inert={!isOpen} className={isOpen ? 'animate-fade-in' : 'h-0 overflow-hidden opacity-0'}>
           <HeroSection data={weddingData} />
           <QuoteSection quote={weddingData.quote} />
           <CoupleSection data={weddingData} />

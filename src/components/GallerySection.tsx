@@ -95,7 +95,7 @@ export default function GallerySection({ images }: GallerySectionProps) {
                 alt={photo.alt}
                 loading="lazy"
                 decoding="async"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-700 motion-safe:hover:scale-105"
               />
             </button>
           </FadeUp>

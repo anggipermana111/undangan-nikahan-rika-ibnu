@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 body {
-  background: #1F3A34;
-  color: #1C2A26;
+  background: theme('colors.forest.900');
+  color: theme('colors.ink');
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #F5EFE4; }
-::-webkit-scrollbar-thumb { background: #1F3A34; border-radius: 9999px; }
+::-webkit-scrollbar-track { background: theme('colors.cream.50'); }
+::-webkit-scrollbar-thumb { background: theme('colors.forest.900'); border-radius: 9999px; }
 
 /* ===== Scroll reveal ===== */
 .fade-up {

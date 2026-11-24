@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cinzel, Cormorant_Garamond, Pinyon_Script, Quicksand } from "next/font/google";
 import "./globals.css";
+import { colors } from "@/theme/colors";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1F3A34",
+  themeColor: colors.forest[900],
 };
 
 export default function RootLayout({
