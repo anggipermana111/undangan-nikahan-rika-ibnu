@@ -22,8 +22,8 @@ export const weddingData: WeddingData = {
   dateLong: '3 Desember 2026',
   monogram: 'R I',
   coverPhoto: '/images/couple/cover.jpg',
-  heroPhoto: '/images/gallery/10.jpg',
-  closingPhoto: '/images/gallery/09.jpg',
+  heroPhoto: '/images/gallery/09.jpg',
+  closingPhoto: '/images/gallery/10.jpg',
   quote: {
     text: 'Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.',
     source: 'QS. Ar-Rum: 21',

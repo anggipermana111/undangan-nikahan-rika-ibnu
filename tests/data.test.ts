@@ -24,8 +24,8 @@ describe('Wedding Data Structure', () => {
   it('has theme photos and monogram', () => {
     expect(weddingData.monogram).toBe('R I');
     expect(weddingData.coverPhoto).toBe('/images/couple/cover.jpg');
-    expect(weddingData.heroPhoto).toBe('/images/gallery/10.jpg');
-    expect(weddingData.closingPhoto).toBe('/images/gallery/09.jpg');
+    expect(weddingData.heroPhoto).toBe('/images/gallery/09.jpg');
+    expect(weddingData.closingPhoto).toBe('/images/gallery/10.jpg');
     expect(weddingData.events.akad.photo).toBe('/images/gallery/03.jpg');
     expect(weddingData.events.resepsi.photo).toBe('/images/gallery/04.jpg');
     expect(weddingData.bride.photo).toBe('/images/couple/bride.jpg');
